@@ -1,0 +1,14 @@
+{
+  "version": "1.0.0-*",
+  "description": "Redakt.Model Class Library",
+  "authors": [ "JaspervanderSterrenC" ],
+  "tags": [ "" ],
+  "projectUrl": "",
+  "licenseUrl": "",
+  "frameworks": {
+    "dnx451": { }
+  },
+  "dependencies": {
+    "MongoDB.Bson": "2.2.3"
+  }
+}

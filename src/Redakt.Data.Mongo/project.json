@@ -1,0 +1,17 @@
+﻿{
+  "version": "1.0.0-*",
+  "description": "Redakt.Data.Mongo Class Library",
+  "authors": [ "JaspervanderSterrenC" ],
+  "tags": [ "" ],
+  "projectUrl": "",
+  "licenseUrl": "",
+  "frameworks": {
+    "dnx451": { }
+  },
+  "dependencies": {
+    "Microsoft.Extensions.OptionsModel": "1.0.0-rc1-final",
+    "MongoDB.Driver": "2.2.3",
+    "Redakt.Data": "1.0.0-*",
+    "Redakt.Model": "1.0.0-*"
+  }
+}

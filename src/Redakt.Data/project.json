@@ -1,0 +1,14 @@
+﻿{
+  "version": "1.0.0-*",
+  "description": "Redakt.Data Class Library",
+  "authors": [ "JaspervanderSterrenC" ],
+  "tags": [ "" ],
+  "projectUrl": "",
+  "licenseUrl": "",
+  "frameworks": {
+    "dnx451": { }
+  },
+  "dependencies": {
+    "Redakt.Model": "1.0.0-*"
+  }
+}

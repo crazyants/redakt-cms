@@ -1,0 +1,60 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 14
+VisualStudioVersion = 14.0.25123.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{12A9CB4E-7325-40AE-BAAD-4B1301550899}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{6E159010-C69B-4F8B-B38E-03C88A7D5540}"
+	ProjectSection(SolutionItems) = preProject
+		global.json = global.json
+	EndProjectSection
+EndProject
+Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "Redakt.Web", "src\Redakt.Web\Redakt.Web.xproj", "{1034FE81-E59E-4AE6-88C6-C9BBFC9516EB}"
+EndProject
+Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "Redakt.Core", "src\Redakt.Core\Redakt.Core.xproj", "{18C8ED2D-A508-453A-80EF-0AFE7295F674}"
+EndProject
+Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "Redakt.Model", "src\Redakt.Model\Redakt.Model.xproj", "{C7ACC94D-CD79-4BF5-8FDA-8C4BB8733E3F}"
+EndProject
+Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "Redakt.Data", "src\Redakt.Data\Redakt.Data.xproj", "{7E004806-F749-441B-9CF7-05E14744D241}"
+EndProject
+Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "Redakt.Data.Mongo", "src\Redakt.Data.Mongo\Redakt.Data.Mongo.xproj", "{C760469B-5A02-4D75-BB2F-803EA88F5537}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{1034FE81-E59E-4AE6-88C6-C9BBFC9516EB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1034FE81-E59E-4AE6-88C6-C9BBFC9516EB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1034FE81-E59E-4AE6-88C6-C9BBFC9516EB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1034FE81-E59E-4AE6-88C6-C9BBFC9516EB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{18C8ED2D-A508-453A-80EF-0AFE7295F674}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{18C8ED2D-A508-453A-80EF-0AFE7295F674}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{18C8ED2D-A508-453A-80EF-0AFE7295F674}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{18C8ED2D-A508-453A-80EF-0AFE7295F674}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C7ACC94D-CD79-4BF5-8FDA-8C4BB8733E3F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C7ACC94D-CD79-4BF5-8FDA-8C4BB8733E3F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C7ACC94D-CD79-4BF5-8FDA-8C4BB8733E3F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C7ACC94D-CD79-4BF5-8FDA-8C4BB8733E3F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7E004806-F749-441B-9CF7-05E14744D241}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7E004806-F749-441B-9CF7-05E14744D241}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7E004806-F749-441B-9CF7-05E14744D241}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7E004806-F749-441B-9CF7-05E14744D241}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C760469B-5A02-4D75-BB2F-803EA88F5537}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C760469B-5A02-4D75-BB2F-803EA88F5537}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C760469B-5A02-4D75-BB2F-803EA88F5537}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C760469B-5A02-4D75-BB2F-803EA88F5537}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{1034FE81-E59E-4AE6-88C6-C9BBFC9516EB} = {12A9CB4E-7325-40AE-BAAD-4B1301550899}
+		{18C8ED2D-A508-453A-80EF-0AFE7295F674} = {12A9CB4E-7325-40AE-BAAD-4B1301550899}
+		{C7ACC94D-CD79-4BF5-8FDA-8C4BB8733E3F} = {12A9CB4E-7325-40AE-BAAD-4B1301550899}
+		{7E004806-F749-441B-9CF7-05E14744D241} = {12A9CB4E-7325-40AE-BAAD-4B1301550899}
+		{C760469B-5A02-4D75-BB2F-803EA88F5537} = {12A9CB4E-7325-40AE-BAAD-4B1301550899}
+	EndGlobalSection
+EndGlobal
