@@ -4,7 +4,6 @@ import {bootstrap} from 'aurelia-bootstrapper-webpack';
 import 'bootstrap';
 
 import '../node_modules/bootstrap/dist/css/bootstrap.css';
-//import '../node_modules/font-awesome/css/font-awesome.css';
 import '../assets/css/core.css';
 import '../assets/css/components.css';
 import '../assets/css/icons.css';
