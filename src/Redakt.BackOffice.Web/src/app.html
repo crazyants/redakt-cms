@@ -1,10 +1,13 @@
 <template>
-  <require from="nav-bar.html"></require>
-<!--  <require from="bootstrap/dist/css/bootstrap.css"></require> --> 
-  
-  <nav-bar router.bind="router"></nav-bar>
+    <require from='components/nav-header.html'></require>
+    <require from='components/nav-footer.html'></require>
 
-  <div class="page-host">
-    <router-view></router-view>
-  </div>
+    <nav-header router.bind="router"></nav-header>
+    <div class="wrapper">
+        <div class="container">
+            <router-view></router-view>
+
+            <nav-footer></nav-footer>
+        </div>
+    </div>
 </template>

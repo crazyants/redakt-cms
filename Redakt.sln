@@ -43,6 +43,8 @@ Project("{E24C65DC-7377-472B-9ABA-BC803B73C61A}") = "Redakt.BackOffice.Web", "sr
 		SlnRelativePath = "src\Redakt.BackOffice.Web\"
 	EndProjectSection
 EndProject
+Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "Redakt.Starter.Web", "src\Redakt.Starter.Web\Redakt.Starter.Web.xproj", "{63F6FB4F-C97B-4DEB-81E7-DF1B75F44302}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -77,6 +79,10 @@ Global
 		{95CD0928-E8BF-42BE-A054-A8317C163C8F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{95CD0928-E8BF-42BE-A054-A8317C163C8F}.Release|Any CPU.ActiveCfg = Debug|Any CPU
 		{95CD0928-E8BF-42BE-A054-A8317C163C8F}.Release|Any CPU.Build.0 = Debug|Any CPU
+		{63F6FB4F-C97B-4DEB-81E7-DF1B75F44302}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{63F6FB4F-C97B-4DEB-81E7-DF1B75F44302}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{63F6FB4F-C97B-4DEB-81E7-DF1B75F44302}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{63F6FB4F-C97B-4DEB-81E7-DF1B75F44302}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -89,5 +95,6 @@ Global
 		{89FC65D4-4A1D-43C1-AA02-CC3C18C53F7B} = {12A9CB4E-7325-40AE-BAAD-4B1301550899}
 		{C8A71988-5231-4C02-8C86-935023CCE36C} = {12A9CB4E-7325-40AE-BAAD-4B1301550899}
 		{95CD0928-E8BF-42BE-A054-A8317C163C8F} = {12A9CB4E-7325-40AE-BAAD-4B1301550899}
+		{63F6FB4F-C97B-4DEB-81E7-DF1B75F44302} = {12A9CB4E-7325-40AE-BAAD-4B1301550899}
 	EndGlobalSection
 EndGlobal
