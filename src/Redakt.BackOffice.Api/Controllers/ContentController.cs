@@ -8,7 +8,7 @@ using Redakt.Model;
 
 // For more information on enabling Web API for empty projects, visit http://go.microsoft.com/fwlink/?LinkID=397860
 
-namespace Redakt.Web.Controllers
+namespace Redakt.BackOffice.Api.Controllers
 {
     [Route("~redakt/api/[controller]")]
     public class ContentController : Controller
