@@ -14,7 +14,8 @@ export class App {
         //config.addPipelineStep('authorize', AuthorizeStep);
         config.map([
             { name: 'dashboard', route: ['', 'dashboard'], moduleId: './views/dashboard', nav: true, title: 'Dashboard', icon: 'dashboard' },
-            { name: 'content', route: 'content', moduleId: './views/dashboard', nav: true, title: 'Content', icon: 'content-copy' },
+            { name: 'pages', route: 'pages', moduleId: './views/pages', nav: true, title: 'Content', icon: 'content-copy' },
+            { name: 'page', route: 'pages/:id', moduleId: './views/pages', nav: false, title: 'Content', icon: 'content-copy' },
             { name: 'resources', route: 'resources', moduleId: './views/dashboard', nav: true, title: 'Resources', icon: 'attachment' }
         ]);
 

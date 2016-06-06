@@ -14,14 +14,14 @@ namespace Redakt.Data.Mongo.Repository
         {
         }
 
-        public Task<List<Page>> GetChildren(string pageId)
+        public Task<IList<Page>> GetChildren(string pageId)
         {
-            return this.Collection.Find(x => x.AncestorIds.LastOrDefault() == pageId).Limit(null).ToListAsync();
+            return this.FindAsync(x => x.AncestorIds.LastOrDefault() == pageId);
         }
 
-        public Task<List<Page>> GetDescendants(string pageId)
+        public Task<IList<Page>> GetDescendants(string pageId)
         {
-            return this.Collection.Find(x => x.AncestorIds.Contains(pageId)).Limit(null).ToListAsync();
+            return this.FindAsync(x => x.AncestorIds.Contains(pageId));
         }
     }
 }

@@ -8,7 +8,7 @@ namespace Redakt.Model
         #region [ Model Properties ]
         public string PageId { get; set; }
 
-        public string LanguageId { get; set; }
+        public string Culture { get; set; }
 
         public DateTime Created { get; set; }
 

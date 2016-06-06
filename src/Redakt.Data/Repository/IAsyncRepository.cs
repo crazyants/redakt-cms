@@ -10,8 +10,8 @@ namespace Redakt.Data.Repository
     {
         Task<T> GetAsync(string id);
         Task<T> GetAsync(Expression<Func<T, bool>> filter);
-        Task<List<T>> GetAsync(IEnumerable<string> ids);
-        Task<List<T>> FindAsync(Expression<Func<T, bool>> filter);
+        Task<IList<T>> GetAsync(IEnumerable<string> ids);
+        Task<IList<T>> FindAsync(Expression<Func<T, bool>> filter);
         Task<bool> ExistsAsync(string id);
         Task<bool> AnyAsync(Expression<Func<T, bool>> filter);
         Task DeleteAsync(string id);

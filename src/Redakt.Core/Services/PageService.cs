@@ -4,15 +4,21 @@ using System.Linq;
 using Redakt.Core.Cache;
 using Redakt.Data.Repository;
 using Redakt.Model;
+using System.Threading.Tasks;
+using System.Threading;
+using System.Runtime.CompilerServices;
 
 namespace Redakt.Core.Services
 {
     public interface IPageService
     {
-        Page Get(string id);
-        IEnumerable<Page> GetAncestors(Page page);
-        void Move(Page page, Page newParent);
-        void Save(Page page);
+        Task<Page> Get(string id);
+        Task<Page> GetParent(Page page);
+        Task<IList<Page>> GetAncestors(Page page);
+        Task<IList<Page>> GetChildren(string pageId);
+        Task<IList<Page>> GetDescendants(string pageId);
+        Task Move(Page page, Page newParent);
+        Task Save(Page page);
     }
 
     public class PageService : IPageService
@@ -26,45 +32,74 @@ namespace Redakt.Core.Services
             _cache = cache;
         }
 
-        public Page Get(string id)
+        public Task<Page> Get(string id)
         {
-            return _cache.GetOrSet(id, s => _pageRepository.GetAsync(s).Result);
+            return _cache.AddOrGetExistingAsync(id, s => _pageRepository.GetAsync(s));
         }
 
-        public IEnumerable<Page> GetAncestors(Page page)
+        public Task<IList<Page>> GetAncestors(Page page)
         {
             return Get(page.AncestorIds);
         }
 
-        public void Move(Page page, Page newParent)
+        public Task<Page> GetParent(Page page)
         {
-            var ancestors = newParent.AncestorIds.ToList();
-            ancestors.Add(newParent.Id);
-            page.AncestorIds = ancestors;
-
-            Save(page);
+            return Get(page.ParentId);
         }
 
-        public void Save(Page page)
+        public Task<IList<Page>> GetChildren(string pageId)
         {
-            _pageRepository.SaveAsync(page);
+            return _pageRepository.GetChildrenAsync(pageId);
         }
 
-        public void SaveAndPublish(Page page)
+        public Task<IList<Page>> GetDescendants(string pageId)
+        {
+            return _pageRepository.GetDescendantsAsync(pageId);
+        }
+
+        public async Task Move(Page page, Page newParent)
+        {
+            var oldParentId = page.ParentId;
+
+            page.SetParent(newParent);
+            await _pageRepository.SaveAsync(page);
+
+            if (oldParentId != null && !await _pageRepository.HasChildrenAsync(oldParentId).ConfigureAwait(false))
+            {
+                await _pageRepository.SetHasChildrenAsync(page.ParentId, false).ConfigureAwait(false);
+            }
+
+            if (newParent != null && !newParent.HasChildren)
+            {
+                await _pageRepository.SetHasChildrenAsync(page.ParentId, true);
+            }
+        }
+
+        public Task Save(Page page)
+        {
+            if (page.IsNew() && page.ParentId != null)
+            {
+                return Task.WhenAll(_pageRepository.SetHasChildrenAsync(page.ParentId, true), _pageRepository.SaveAsync(page));
+            }
+
+            return _pageRepository.SaveAsync(page);
+        }
+
+        public Task SaveAndPublish(Page page)
         {
             page.PublishedAt = DateTime.UtcNow;
             page.PublishedByUserId = RedaktContext.Current.User.Id;
 
-            Save(page);
+            return Save(page);
         }
 
-        private IEnumerable<Page> Get(IEnumerable<string> ids)
+        private async Task<IList<Page>> Get(IEnumerable<string> ids)
         {
-            var pages = ids.Select(id => _cache.GetOrDefault<Page>(id));
-            if (pages.Count() == ids.Count()) return pages;
+            var cachedPages = _cache.Get<Page>(ids).ToList();
+            if (cachedPages.Count() == ids.Count()) return cachedPages;
 
-            pages = _pageRepository.GetAsync(ids).Result;
-            foreach (var page in pages) _cache.Set(page);
+            var pages = await _pageRepository.GetAsync(ids);
+            _cache.Set<Page>(pages);
             return pages;
         }
     }

@@ -4,12 +4,14 @@ using System.Linq;
 using Redakt.Core.Cache;
 using Redakt.Data.Repository;
 using Redakt.Model;
+using System.Threading.Tasks;
 
 namespace Redakt.Core.Services
 {
     public interface IPageContentService
     {
-        PageContent Get(string id);
+        Task<PageContent> Get(string id);
+        Task Save(PageContent content);
     }
 
     public class PageContentService: IPageContentService
@@ -23,9 +25,14 @@ namespace Redakt.Core.Services
             _cache = cache;
         }
 
-        public PageContent Get(string id)
+        public Task<PageContent> Get(string id)
         {
-            return _cache.GetOrSet(id, s => _pageContentRepository.GetAsync(s).Result);
+            return _cache.AddOrGetExistingAsync(id, s => _pageContentRepository.GetAsync(s));
+        }
+
+        public Task Save(PageContent content)
+        {
+            return _pageContentRepository.SaveAsync(content);
         }
     }
 }

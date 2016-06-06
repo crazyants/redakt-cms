@@ -11,6 +11,8 @@ namespace Redakt.Model
         public List<string> CompositedContentTypeIds { get; set; }
 
         public Dictionary<string, FieldDefinition> Fields { get; set; }
+
+        public string IconClass { get; set; }
         #endregion
     }
 }

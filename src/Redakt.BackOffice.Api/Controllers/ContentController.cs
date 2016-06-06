@@ -1,42 +1,42 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNet.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using Redakt.Core.Services;
 using Redakt.Model;
+using System.Threading.Tasks;
 
 // For more information on enabling Web API for empty projects, visit http://go.microsoft.com/fwlink/?LinkID=397860
 
 namespace Redakt.BackOffice.Api.Controllers
 {
-    [Route("~redakt/api/[controller]")]
+    [Route("redakt/api/content")]
     public class ContentController : Controller
     {
-        private readonly ISiteService _siteService;
+        private readonly IPageContentService _pageContentService;
 
-        public ContentController(ISiteService siteService)
+        public ContentController(IPageContentService pageContentService)
         {
-            _siteService = siteService;
+            _pageContentService = pageContentService;
         }
 
-        [HttpGet("site/{id}")]
-        public Site GetSite(string id)
+        [HttpGet("{id}")]
+        public async Task<IActionResult> GetContent(string id)
         {
-            return _siteService.Get(id);
+            var content = await _pageContentService.Get(id);
+            if (content == null) return NotFound();
+            return Ok(content);
         }
 
-        [HttpPost("site")]
-        public string CreateSite(Site site)
+        [HttpPost("")]
+        public async Task<IActionResult> CreateContent(PageContent content)
         {
-            _siteService.Save(site);
-            return site.Id;
+            await _pageContentService.Save(content);
+            return Ok(content.Id);
         }
 
-        [HttpPut("site/{id}")]
-        public void UpdateSite(string id, Site site)
+        [HttpPut("{id}")]
+        public async Task<IActionResult> UpdateContent(string id, PageContent content)
         {
-            _siteService.Save(site);
+            await _pageContentService.Save(content);
+            return Ok();
         }
     }
 }

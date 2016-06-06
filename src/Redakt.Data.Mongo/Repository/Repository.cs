@@ -32,9 +32,9 @@ namespace Redakt.Data.Mongo.Repository
             return this.Collection.Find(x => x.Id == id).FirstOrDefaultAsync();
         }
 
-        public Task<List<T>> GetAsync(IEnumerable<string> ids)
+        public async Task<IList<T>> GetAsync(IEnumerable<string> ids)
         {
-            return this.Collection.Find(Builders<T>.Filter.In(x => x.Id, ids)).Limit(null).ToListAsync();
+            return await this.Collection.Find(Builders<T>.Filter.In(x => x.Id, ids)).Limit(null).ToListAsync().ConfigureAwait(false);
         }
 
         public Task DeleteAsync(string id)
@@ -119,21 +119,21 @@ namespace Redakt.Data.Mongo.Repository
             return this.Collection.Find(new ExpressionFilterDefinition<T>(filter)).FirstOrDefaultAsync();
         }
 
-        public Task<List<T>> FindAsync(Expression<Func<T, bool>> filter)
+        public async Task<IList<T>> FindAsync(Expression<Func<T, bool>> filter)
         {
-            return this.Collection.Find(new ExpressionFilterDefinition<T>(filter)).Limit(null).ToListAsync();
+            return await this.Collection.Find(new ExpressionFilterDefinition<T>(filter)).Limit(null).ToListAsync().ConfigureAwait(false);
         }
         #endregion
 
         #region [ Helper Methods ]
-        protected Task<List<T>> FindAsync<TVal>(string field, TVal value)
+        protected async Task<IList<T>> FindAsync<TVal>(string field, TVal value)
         {
-            return this.Collection.Find(Builders<T>.Filter.Eq(field, value)).Limit(null).ToListAsync();
+            return await this.Collection.Find(Builders<T>.Filter.Eq(field, value)).Limit(null).ToListAsync().ConfigureAwait(false);
         }
 
-        protected Task<List<T>> FindAsync<TVal>(string field, IEnumerable<TVal> values)
+        protected async Task<IList<T>> FindAsync<TVal>(string field, IEnumerable<TVal> values)
         {
-            return this.Collection.Find(Builders<T>.Filter.In(field, values)).Limit(null).ToListAsync();
+            return await this.Collection.Find(Builders<T>.Filter.In(field, values)).Limit(null).ToListAsync().ConfigureAwait(false);
         }
         #endregion
     }

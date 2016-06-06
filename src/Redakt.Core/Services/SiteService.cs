@@ -4,34 +4,41 @@ using System.Linq;
 using Redakt.Core.Cache;
 using Redakt.Data.Repository;
 using Redakt.Model;
+using System.Threading.Tasks;
 
 namespace Redakt.Core.Services
 {
     public interface ISiteService
     {
-        Site Get(string id);
-        void Save(Site page);
+        Task<IList<Site>> GetAll();
+        Task<Site> Get(string id);
+        Task Save(Site page);
     }
 
     public class SiteService : ISiteService
     {
-        private readonly ISiteRepository _pageRepository;
+        private readonly ISiteRepository _siteRepository;
         private readonly ICache _cache;
 
-        public SiteService(ISiteRepository pageRepository, ICache cache)
+        public SiteService(ISiteRepository siteRepository, ICache cache)
         {
-            _pageRepository = pageRepository;
+            _siteRepository = siteRepository;
             _cache = cache;
         }
 
-        public Site Get(string id)
+        public Task<Site> Get(string id)
         {
-            return _cache.GetOrSet(id, s => _pageRepository.GetAsync(s).Result);
+            return _cache.AddOrGetExistingAsync(id, s => _siteRepository.GetAsync(s));
         }
 
-        public void Save(Site site)
+        public Task<IList<Site>> GetAll()
         {
-            _pageRepository.SaveAsync(site);
+            return _siteRepository.FindAsync(s => true);
+        }
+
+        public Task Save(Site site)
+        {
+            return _siteRepository.SaveAsync(site);
         }
     }
 }

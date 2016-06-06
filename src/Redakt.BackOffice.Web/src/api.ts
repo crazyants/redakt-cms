@@ -19,7 +19,7 @@ export class Api {
     }
 
 	private apiClientId = '526ce7f8cc6f100c78c15a7f';
-    private apiBase = 'https://localhost:44321';
+    private apiBase = 'http://localhost:59522/redakt/api/';
     private tokenEndpoint = 'https://localhost:44349/connect/token';
     //private apiBase = 'http://loggitapi.azurewebsites.net';
     private tokenCookieKey = 'REDAKT.TOKEN';
@@ -147,9 +147,7 @@ export class Api {
    //     return deferred.promise;
    // }
 
-    public get(url: string, fields?: Array<string>, expand?: Array<string>): Promise<any> {
-        if (fields) url += '?fields=' + fields.join(',');
-        if (expand) url += (fields ? '&expand=' : '?expand=') + expand.join(',');
+    public get(url: string): Promise<any> {
 		return this.http.fetch(url)
             .then(r => r.json())
             .catch(e => alert('Error.'));

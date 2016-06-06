@@ -6,9 +6,9 @@ namespace Redakt.Data.Repository
 {
     public interface IPageRepository: IAsyncRepository<Page>
     {
-        Task<List<Page>> GetChildren(string pageId);
-        Task<List<Page>> GetDescendants(string pageId);
-        //Task UpsertBagAssignments(IEnumerable<Address> addresses);
-        //Task UpdateBagPublicSpaces(IEnumerable<Address> addresses);
+        Task<IList<Page>> GetChildrenAsync(string pageId);
+        Task<IList<Page>> GetDescendantsAsync(string pageId);
+        Task<bool> HasChildrenAsync(string pageId);
+        Task SetHasChildrenAsync(string pageId, bool hasChildren);
     }
 }

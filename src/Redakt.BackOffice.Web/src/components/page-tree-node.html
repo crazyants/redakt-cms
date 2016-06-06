@@ -1,0 +1,9 @@
+<template>
+    <li class="node ${isExpanded ? '' : 'collapsed'}">
+        <span class="leaf"><a route-href="route: page; params.bind: {id:page.id}"><span class="${page.iconClass}"></span> ${page.name}</a></span>
+        <span if.bind="page.hasChildren" class="node-toggle" click.trigger="toggle()"></span>
+        <ul if.bind="page.hasChildren">
+            <page-tree-node repeat.for="child of children" page.bind="child"></page-tree-node>
+        </ul>
+    </li>
+</template>

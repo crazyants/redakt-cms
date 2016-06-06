@@ -10,6 +10,7 @@ import '../assets/css/icons.css';
 import '../assets/css/pages.css';
 import '../assets/css/menu.css';
 import '../assets/css/responsive.css';
+import '../assets/custom/treeview.css';
 
 bootstrap((aurelia: Aurelia): void => {
   aurelia.use

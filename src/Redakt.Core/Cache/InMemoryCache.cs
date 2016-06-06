@@ -1,58 +1,91 @@
 ﻿using System;
 using System.Collections.Concurrent;
 using System.Linq;
-using System.Timers;
 using Redakt.Model;
+using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace Redakt.Core.Cache
 {
     public class InMemoryCache: ICache
     {
-        private readonly ConcurrentDictionary<string, CacheObject> _cache = new ConcurrentDictionary<string, CacheObject>();
-        private readonly Timer _pruningTimer = new Timer(300 * 100);
+        private readonly ConcurrentDictionary<string, CacheItem> _cache = new ConcurrentDictionary<string, CacheItem>();
+        //private readonly Timer _pruningTimer = new Timer(300 * 100);
         private int _maxAgeSeconds = 300;
 
         public InMemoryCache()
         {
-            _pruningTimer.Elapsed += (sender, args) => Prune();
-            _pruningTimer.Start();
+            //_pruningTimer.Elapsed += (sender, args) => Prune();
+            //_pruningTimer.Start();
         }
 
         public T GetOrDefault<T>(string id, T defaultValue = default(T)) where T : IEntity
         {
-            CacheObject val;
+            CacheItem item;
 
-            if (_cache.TryGetValue(id, out val))
+            if (_cache.TryGetValue(id, out item))
             {
-                if (val.LastHit < DateTime.UtcNow.AddSeconds(-_maxAgeSeconds)) return defaultValue;
-                val.LastHit = DateTime.UtcNow;
+                if (!IsFresh(item)) return defaultValue;
+                item.LastHit = DateTime.UtcNow;
             }
-            return (T)val?.Value;
+            return (T)item?.Value;
         }
 
-        public T GetOrSet<T>(string id, Func<string, T> getMethod) where T: IEntity
+        public IEnumerable<T> Get<T>(IEnumerable<string> ids) where T : IEntity
         {
-            CacheObject val;
-
-            if (!_cache.TryGetValue(id, out val) || val.LastHit < DateTime.UtcNow.AddSeconds(-_maxAgeSeconds))
+            foreach (var id in ids)
             {
-                var obj = getMethod(id);
+                CacheItem item;
+                if (_cache.TryGetValue(id, out item) && IsFresh(item))
+                {
+                    item.LastHit = DateTime.UtcNow;
+                    yield return (T)item.Value;
+                }
+            }
+        }
+
+        public async Task<T> AddOrGetExistingAsync<T>(string id, Func<string, Task<T>> getMethod) where T : IEntity
+        {
+            CacheItem item;
+            if (!_cache.TryGetValue(id, out item) || !IsFresh(item))
+            {
+                var obj = await getMethod(id);
                 if (obj != null) Set(obj);
                 return obj;
             }
 
-            val.LastHit = DateTime.UtcNow;
-            return (T)val.Value;
+            item.LastHit = DateTime.UtcNow;
+            return (T)item.Value;
         }
+
+        //public T AddOrGetExisting<T>(string id, Func<string, T> getMethod) where T: IEntity
+        //{
+        //    CacheItem item;
+
+        //    if (!_cache.TryGetValue(id, out item) || !IsFresh(item))
+        //    {
+        //        var obj = getMethod(id);
+        //        if (obj != null) Set(obj);
+        //        return obj;
+        //    }
+
+        //    item.LastHit = DateTime.UtcNow;
+        //    return (T)item.Value;
+        //}
 
         public void Set<T>(T obj) where T : IEntity
         {
-            _cache[obj.Id] = new CacheObject(obj);
+            _cache[obj.Id] = new CacheItem(obj);
+        }
+
+        public void Set<T>(IEnumerable<T> objs) where T : IEntity
+        {
+            foreach (var obj in objs) Set(obj);
         }
 
         public void Remove(string id)
         {
-            CacheObject val;
+            CacheItem val;
             _cache.TryRemove(id, out val);
         }
 
@@ -66,7 +99,7 @@ namespace Redakt.Core.Cache
             get { return _maxAgeSeconds; }
             set
             {
-                _pruningTimer.Interval = value * 100;
+               // _pruningTimer.Interval = value * 100;
                 _maxAgeSeconds = value;
             }
         }
@@ -75,9 +108,14 @@ namespace Redakt.Core.Cache
         {
             foreach (var key in _cache.Where(kv => kv.Value.LastHit < DateTime.UtcNow.AddSeconds(-_maxAgeSeconds)).Select(kv => kv.Key))
             {
-                CacheObject val;
+                CacheItem val;
                 _cache.TryRemove(key, out val);
             }
+        }
+
+        private bool IsFresh(CacheItem obj)
+        {
+            return obj.LastHit >= DateTime.UtcNow.AddSeconds(-_maxAgeSeconds);
         }
     }
 }

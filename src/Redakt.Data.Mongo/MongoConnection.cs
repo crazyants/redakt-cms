@@ -1,4 +1,4 @@
-﻿using Microsoft.Extensions.OptionsModel;
+﻿using Microsoft.Extensions.Options;
 using MongoDB.Driver;
 
 namespace Redakt.Data.Mongo

@@ -16,7 +16,9 @@ namespace Redakt.Model
 
         public string ParentId => this.AncestorIds.LastOrDefault();
 
-        public IEnumerable<string> AncestorIds { get; set; }
+        public IReadOnlyCollection<string> AncestorIds { get; private set; }
+
+        public bool HasChildren { get; set; }
 
         public string PageTypeId { get; set; }
 
@@ -31,6 +33,27 @@ namespace Redakt.Model
         public string PublishedByUserId { get; set; }
 
         public bool IsPublished => PublishedAt <= DateTime.UtcNow;
+        #endregion
+
+        #region [ Methods ]
+        public bool IsNew()
+        {
+            return this.Id == null;
+        }
+
+        public void SetParent(Page parent)
+        {
+            if (parent == null)
+            {
+                this.AncestorIds = new List<string>();
+            }
+            else
+            {
+                var ancestors = parent.AncestorIds.ToList();
+                ancestors.Add(parent.Id);
+                this.AncestorIds = ancestors;
+            }
+        }
         #endregion
     }
 }

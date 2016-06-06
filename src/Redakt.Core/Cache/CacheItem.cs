@@ -2,9 +2,9 @@
 
 namespace Redakt.Core.Cache
 {
-    internal class CacheObject
+    internal class CacheItem
     {
-        public CacheObject(object value)
+        public CacheItem(object value)
         {
             this.Inserted = this.LastHit = DateTime.UtcNow;
             this.Value = value;

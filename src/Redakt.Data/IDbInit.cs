@@ -1,6 +1,6 @@
 ﻿namespace Redakt.Data
 {
-    public interface IDbSetup
+    public interface IDbInit
     {
         void Run();
     }
