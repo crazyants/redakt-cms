@@ -12,6 +12,11 @@ namespace Redakt.Model
         T GetValue(T defaultValue = default(T));
         TValue GetValue<TValue>(TValue defaultValue = default(TValue));
         void SetValue(object val);
-        object Configuration { get; set; }
+        //object Configuration { get; set; }
+    }
+
+    public interface IConfigurableFieldEditor<T, TConfig>: IFieldEditor<T>
+    {
+        TConfig Configuration { get; set; }
     }
 }

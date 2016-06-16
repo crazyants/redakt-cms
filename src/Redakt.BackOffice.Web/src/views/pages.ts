@@ -1,7 +1,7 @@
 import {autoinject} from 'aurelia-framework';
 import {Router, activationStrategy} from 'aurelia-router';
-import {Page, PageTreeItem} from '../models/page';
-import {SiteListItem} from '../models/site';
+import {ISiteListItem, IPageTreeItem} from '../models/interfaces';
+import {Page} from '../models/page';
 import {SiteService, PageService} from '../services/services';
 
 @autoinject
@@ -10,9 +10,9 @@ export class PageView {
 		//debugger;
     }
 
-    public sites: Array<SiteListItem>;
-    public selectedSite: SiteListItem;
-    public homePage: PageTreeItem;
+    public sites: Array<ISiteListItem>;
+    public selectedSite: ISiteListItem;
+    public homePage: IPageTreeItem;
     public currentPage: Page;
 
     public determineActivationStrategy() {

@@ -13,8 +13,8 @@ namespace Redakt.Model
 
         public T GetValue<T>(string key, T defaultValue = default(T))
         {
-            FieldDefinition fieldDefinition;
-            if (!PageType.Fields.TryGetValue(key, out fieldDefinition)) return defaultValue;
+            var fieldDefinition = PageType.Fields.FirstOrDefault(ft => ft.Key == key);
+            if (fieldDefinition == null) return defaultValue;
 
             object fieldValue;
             if (!Content.Fields.TryGetValue(key, out fieldValue)) return defaultValue;

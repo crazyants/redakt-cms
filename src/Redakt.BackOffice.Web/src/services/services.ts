@@ -1,7 +1,31 @@
 ﻿import {autoinject} from 'aurelia-framework';
 import {Api} from '../api';
-import {Site, SiteListItem} from '../models/site';
-import {Page, PageTreeItem} from '../models/page';
+import {Site} from '../models/site';
+import {Page} from '../models/page';
+import {ISiteListItem, IPageTreeItem} from '../models/interfaces';
+import {IPageType} from '../models/pagetype';
+
+@autoinject()
+export class PageTypeService {
+    constructor(private api: Api) { }
+
+    public getPageType(id: string): Promise<IPageType> {
+        return this.api.get('pagetypes/' + id);
+    }
+
+    public updatePageType(pageType: IPageType): Promise<void> {
+        return this.api.put('pagetypes/' + pageType.id, pageType);
+    }
+
+    public createPageType(pageType: IPageType): Promise<string> {
+        return this.api.post('pagetypes', pageType);
+    }
+
+    public deletePageType(id: string): Promise<void> {
+        return this.api.delete('pagetypes/' + id);
+    }
+}
+
 
 @autoinject()
 export class PageService {
@@ -11,7 +35,7 @@ export class PageService {
         return this.api.get('pages/' + id);
     }
 
-    public getPageTreeItem(id: string): Promise<PageTreeItem> {
+    public getPageTreeItem(id: string): Promise<IPageTreeItem> {
         return this.api.get('pages/' + id + '/treeitem');
     }
 
@@ -31,7 +55,7 @@ export class PageService {
         return this.api.get('pages/' + parentId + '/children');
     }
 
-    public getPageChildrenTreeItem(parentId: string): Promise<Array<PageTreeItem>> {
+    public getPageChildrenTreeItem(parentId: string): Promise<Array<IPageTreeItem>> {
         return this.api.get('pages/' + parentId + '/children/treeitem');
     }
 }
@@ -56,7 +80,7 @@ export class SiteService {
         return this.api.delete('sites/' + id);
     }
 
-    public getAllSites(): Promise<Array<SiteListItem>> {
+    public getAllSites(): Promise<Array<ISiteListItem>> {
         return this.api.get('sites/list');
     }
 }

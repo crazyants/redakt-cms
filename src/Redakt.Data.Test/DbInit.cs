@@ -27,12 +27,42 @@ namespace Redakt.Data.Test
         {
             _logger.LogDebug("Populating test data.");
 
+            //var numberFieldEditor = new FieldType
+            //{
+
+            //};
+            var numberFieldType = new FieldType
+            {
+                Name = "Numeric"
+            };
+            var stringFieldType = new FieldType
+            {
+                Name = "Textstring"
+            };
+            var areaFieldType = new FieldType
+            {
+                Name = "Textarea"
+            };
+            var rtfFieldType = new FieldType
+            {
+                Name = "Rich text editor"
+            };
+            FieldTypeRepository.Collection.Add(numberFieldType);
+            FieldTypeRepository.Collection.Add(stringFieldType);
+            FieldTypeRepository.Collection.Add(areaFieldType);
+            FieldTypeRepository.Collection.Add(rtfFieldType);
+
             var pageType = new PageType
             {
                 Id = Guid.NewGuid().ToString("N"),
                 Name = "Content Page Type",
                 IconClass = "md md-content-copy"
             };
+            pageType.Fields.Add(new FieldDefinition { Key = "title", Label = "Titel", FieldTypeId = stringFieldType.Id });
+            pageType.Fields.Add(new FieldDefinition { Key = "quantity", Label = "Hoeveelheid", FieldTypeId = numberFieldType.Id });
+            pageType.Fields.Add(new FieldDefinition { Key = "intro", Label = "Introtekst", FieldTypeId = areaFieldType.Id });
+            pageType.Fields.Add(new FieldDefinition { Key = "body", Label = "Body tekst", FieldTypeId = rtfFieldType.Id });
+
             PageTypeRepository.Collection.Add(pageType);
 
             // Pages

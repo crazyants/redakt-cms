@@ -1,10 +1,10 @@
 import {bindable, autoinject} from 'aurelia-framework';
 import {PageService} from '../services/services';
-import {PageTreeItem} from '../models/page';
+import {IPageTreeItem} from '../models/interfaces';
 
 @autoinject
 export class PageTreeNode {
-    @bindable page: PageTreeItem;
+    @bindable page: IPageTreeItem;
 
     constructor(private pageService: PageService) {
         //debugger;
@@ -13,7 +13,7 @@ export class PageTreeNode {
     public isVisible: boolean = true;
     public isExpanded: boolean = false;
     public isLoading: boolean = false;
-    public children: Array<PageTreeItem>;
+    public children: Array<IPageTreeItem>;
 
     public toggle() {
         this.isExpanded = !this.isExpanded;

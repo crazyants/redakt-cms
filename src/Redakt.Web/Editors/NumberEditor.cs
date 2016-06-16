@@ -10,7 +10,7 @@ namespace Redakt.Web.Editors
         public int? DecimalPlaces { get; set; }
     }
 
-    public class NumberEditor: IFieldEditor<decimal>
+    public class NumberEditor: IConfigurableFieldEditor<decimal, NumberEditorConfiguration>
     {
         private NumberEditorConfiguration _config;
         private decimal? _value;
@@ -52,10 +52,6 @@ namespace Redakt.Web.Editors
             }
         }
 
-        public object Configuration
-        {
-            get { return _config; }
-            set { _config = (NumberEditorConfiguration) value; }
-        }
+        public NumberEditorConfiguration Configuration { get; set; }
     }
 }

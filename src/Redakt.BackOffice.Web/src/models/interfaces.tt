@@ -1,0 +1,117 @@
+﻿<#@ template  debug="true" hostSpecific="true" #>
+<#@ output extension=".ts" #>
+<#@ Assembly Name="System.Core" #>
+<#@ Assembly Name="System.Windows.Forms" #>
+<#@ Assembly name="EnvDte" #>
+<#@ import namespace="System" #>
+<#@ import namespace="System.IO" #>
+<#@ import namespace="System.Diagnostics" #>
+<#@ import namespace="System.Linq" #>
+<#@ import namespace="System.Collections" #>
+<#@ import namespace="System.Collections.Generic" #><#@ include file="..\..\VisualStudioHelper.ttinclude" #>
+<#
+	var project = VisualStudioHelper.GetProject("Redakt.BackOffice.Api");
+	var list = new List<EnvDTE.CodeElement>();
+	foreach (EnvDTE.CodeElement element in project.CodeModel.CodeElements) list.Add(element);
+
+	var ns = GetNamespace("Redakt.BackOffice.Api.Models", list);
+	WriteModels(ns);
+
+	project = VisualStudioHelper.GetProject("Redakt.Model");
+	list = new List<EnvDTE.CodeElement>();
+	foreach (EnvDTE.CodeElement element in project.CodeModel.CodeElements) list.Add(element);
+
+	ns = GetNamespace("Redakt.Model", list);
+	WriteModels(ns);
+#>
+<#+
+string myNS;
+
+public EnvDTE.CodeNamespace GetNamespace(string nsName, IEnumerable<EnvDTE.CodeElement> elements)
+{
+	myNS = nsName;
+	foreach (EnvDTE.CodeElement element in elements)
+    {
+		if (element is EnvDTE.CodeNamespace)
+        {
+			var ns = element as EnvDTE.CodeNamespace;
+			if (ns.FullName.StartsWith(myNS, StringComparison.OrdinalIgnoreCase)) return ns;
+
+			try 
+			{ 
+				var children = ns.Members.OfType<EnvDTE.CodeElement>();
+				var result = GetNamespace(nsName, children);
+				if (result != null) return result;
+			} catch { }
+        }
+	}
+
+	return null;
+}
+
+public void WriteModels(EnvDTE.CodeNamespace ns)
+{
+	foreach (EnvDTE.CodeElement element in ns.Members)
+    {
+		if (element.Kind == EnvDTE.vsCMElement.vsCMElementClass)
+		{
+			var cl = element as EnvDTE.CodeClass;
+			//if (cl.FullName.EndsWith("Model")) RenderDtoClass(cl);
+			RenderDtoClass(cl);
+        }
+	}
+}
+
+public void RenderDtoClass(EnvDTE.CodeClass dto)
+{
+	var name = dto.FullName.Split('.').Last().Replace("Model", "Dto");
+
+	var baseType = dto.Bases.OfType<EnvDTE.CodeElement>().FirstOrDefault();
+	if (!baseType.FullName.Equals("System.Object"))
+	{
+		var baseName = baseType.FullName;
+		var split = baseType.FullName.Split('<', '>');
+		if (split.Count() > 1) name += " extends " + baseType.FullName.Replace("System.Collections.Generic.List", "Array").Replace("System.Collections.Generic.IEnumerable", "Array").Replace(split[1], "I" + split[1].Split('.').Last().Replace("Model", "Dto"));
+		else name += " extends I" + baseType.FullName.Split('.').Last().Replace("Model", "Dto");
+    }
+
+	WriteLine("export interface I{0} {{", name);
+	PushIndent("    ");
+
+	foreach (var member in dto.Members.OfType<EnvDTE.CodeProperty>())
+    {
+		var identifier = member.FullName.Split('.').Last().Replace("Model", "Dto");
+		WriteLine("{0}{1}{2}: {3};", identifier.Substring(0, 1).ToLowerInvariant(), identifier.Substring(1), member.Type.AsString.Contains("?") ? "?" : "", GetTypeScriptType(member.Type.AsString));
+    }
+
+	PopIndent();
+	WriteLine("}");
+	WriteLine("");
+}
+
+public string GetTypeScriptType(string type)
+{
+	switch (type.ToLowerInvariant().Replace("?", "").Split('.').Last())
+    {
+		case "int":
+		case "short":
+		case "int16":
+		case "int32": return "number";
+		case "string": return "string";
+		case "bool":
+		case "boolean": return "boolean";
+		case "datetime": return "Date";
+    }
+
+	var split = type.Split('<', '>');
+	if (split.Count() > 1 && (split[0].Equals("System.Collections.Generic.List") || split[0].Equals("System.Collections.Generic.IEnumerable"))) return string.Format("Array<{0}>", split[1].StartsWith(myNS) ? "I" + split[1].Split('.').Last().Replace("Model", "Dto") : "any");
+	else if (type.StartsWith(myNS)) return "I" + type.Split('.').Last().Replace("Model", "Dto");
+
+	return "any";
+}
+
+public string ToCamelCase(string input)
+{
+	return input.Substring(0, 1).ToLowerInvariant() + input.Substring(1);
+}
+#>
