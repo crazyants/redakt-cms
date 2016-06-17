@@ -10,26 +10,25 @@
 <#@ import namespace="System.Collections" #>
 <#@ import namespace="System.Collections.Generic" #><#@ include file="..\..\VisualStudioHelper.ttinclude" #>
 <#
-	var project = VisualStudioHelper.GetProject("Redakt.BackOffice.Api");
-	var list = new List<EnvDTE.CodeElement>();
-	foreach (EnvDTE.CodeElement element in project.CodeModel.CodeElements) list.Add(element);
-
-	var ns = GetNamespace("Redakt.BackOffice.Api.Models", list);
-	WriteModels(ns);
-
-	project = VisualStudioHelper.GetProject("Redakt.Model");
-	list = new List<EnvDTE.CodeElement>();
-	foreach (EnvDTE.CodeElement element in project.CodeModel.CodeElements) list.Add(element);
-
-	ns = GetNamespace("Redakt.Model", list);
-	WriteModels(ns);
+	GenerateModels("Redakt.BackOffice.Api", "Redakt.BackOffice.Api.Models");
+	GenerateModels("Redakt.Model", "Redakt.Model");
 #>
 <#+
 string myNS;
 
-public EnvDTE.CodeNamespace GetNamespace(string nsName, IEnumerable<EnvDTE.CodeElement> elements)
+public void GenerateModels(string projectName, string namespaceName) 
 {
-	myNS = nsName;
+	myNS = namespaceName;
+
+	var project = VisualStudioHelper.GetProject(projectName);
+	var list = new List<EnvDTE.CodeElement>();
+	foreach (EnvDTE.CodeElement element in project.CodeModel.CodeElements) list.Add(element);
+
+	WriteModels(GetNamespace(list));
+}
+
+public EnvDTE.CodeNamespace GetNamespace(IEnumerable<EnvDTE.CodeElement> elements)
+{
 	foreach (EnvDTE.CodeElement element in elements)
     {
 		if (element is EnvDTE.CodeNamespace)
@@ -40,7 +39,7 @@ public EnvDTE.CodeNamespace GetNamespace(string nsName, IEnumerable<EnvDTE.CodeE
 			try 
 			{ 
 				var children = ns.Members.OfType<EnvDTE.CodeElement>();
-				var result = GetNamespace(nsName, children);
+				var result = GetNamespace(children);
 				if (result != null) return result;
 			} catch { }
         }
