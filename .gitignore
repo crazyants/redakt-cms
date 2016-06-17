@@ -255,3 +255,4 @@ artifacts/
 build/
 dist/
 typings/
+jspm_packages/

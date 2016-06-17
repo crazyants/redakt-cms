@@ -1,25 +1,16 @@
-﻿import {Aurelia} from 'aurelia-framework';
-import {bootstrap} from 'aurelia-bootstrapper-webpack';
+﻿import 'bootstrap';
+import {Aurelia} from 'aurelia-framework';
 
-import 'bootstrap';
+export function configure(aurelia: Aurelia) {
+    aurelia.use
+        .standardConfiguration()
+        .developmentLogging();
 
-import '../node_modules/bootstrap/dist/css/bootstrap.css';
-import '../assets/css/core.css';
-import '../assets/css/components.css';
-import '../assets/css/icons.css';
-import '../assets/css/pages.css';
-import '../assets/css/menu.css';
-import '../assets/css/responsive.css';
-import '../assets/custom/treeview.css';
+    //Uncomment the line below to enable animation.
+    //aurelia.use.plugin('aurelia-animator-css');
 
-bootstrap((aurelia: Aurelia): void => {
-  aurelia.use
-    .standardConfiguration()
-    .developmentLogging();
+    //Anyone wanting to use HTMLImports to load views, will need to install the following plugin.
+    //aurelia.use.plugin('aurelia-html-import-template-loader')
 
-  aurelia.start().then(() => aurelia.setRoot('app', document.body));
-
-  //const rootElem = document.body;
-  //aurelia.start().then(() => aurelia.setRoot('app', rootElem));
-  //rootElem.setAttribute('aurelia-app', '');
-});
+    aurelia.start().then(() => aurelia.setRoot());
+}

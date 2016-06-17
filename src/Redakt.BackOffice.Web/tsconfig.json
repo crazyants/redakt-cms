@@ -1,21 +1,32 @@
 {
+  "compileOnSave": false,
   "compilerOptions": {
+    "rootDir": "src",
+    "outDir": "dist",
+    "sourceMap": true,
     "target": "es5",
-    "module": "commonjs",
+    "module": "amd",
+    "declaration": false,
+    "noImplicitAny": false,
+    "removeComments": true,
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
-    "sourceMap": true
+    "moduleResolution": "node",
+    "lib": ["es6", "dom"]
   },
   "filesGlob": [
     "./src/**/*.ts",
-    "./typings/browser.d.ts"
+    "./test/**/*.ts",
+    "./typings/index.d.ts",
+    "./custom_typings/**/*.d.ts",
+    "./jspm_packages/**/*.d.ts"
   ],
   "exclude": [
     "node_modules",
-    "typings/main",
-    "typings/main.d.ts"
+    "jspm_packages",
+    "test"
   ],
   "atom": {
-    "rewriteTsconfig": true
+    "rewriteTsconfig": false
   }
 }
