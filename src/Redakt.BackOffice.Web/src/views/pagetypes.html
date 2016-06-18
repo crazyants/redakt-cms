@@ -1,0 +1,36 @@
+<template>
+    <compose if.bind="!showList" view-model="./pagetype" model.bind="currentPageType"></compose>
+
+    <div if.bind="showList" class="panel panel-default m-t-20">
+        <div class="panel-body p-0">
+            <div class="table-responsive">
+                <table class="table table-hover mails m-0">
+                    <tbody>
+                        <tr repeat.for="pageType of pageTypes">
+                            <td class="mail-select">
+                                <div class="checkbox checkbox-primary m-r-15">
+                                    <input id="checkbox20" type="checkbox">
+                                    <label for="checkbox20"></label>
+                                </div>
+                                <i class="fa fa-star m-r-15 text-muted"></i>
+                                <i class="fa fa-circle m-l-5 text-success"></i>
+                            </td>
+                            <td>
+                                <a route-href="route: pagetypes; params.bind: {id:pageType.id}" class="email-name">John Deo</a>
+                            </td>
+                            <td>
+                                <a route-href="route: pagetypes; params.bind: {id:pageType.id}" class="email-msg">${pageType.name}</a>
+                            </td>
+                            <td style="width: 20px;">
+                                <i class="fa fa-paperclip"></i>
+                            </td>
+                            <td class="text-right">
+                                7 Oct
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</template>

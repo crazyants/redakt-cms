@@ -13,6 +13,12 @@ export interface ISiteListItem {
     homePageId: string;
 }
 
+export interface IPageTypeListItem {
+    id: string;
+    name: string;
+    iconClass: string;
+}
+
 export interface IUser extends IPersistedEntity {
     name: string;
 }

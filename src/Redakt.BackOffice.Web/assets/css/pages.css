@@ -11,6 +11,7 @@ File: Pages
    - Form Elements
    - Notification
    - Range slider
+   - Sweet Alert
    - Charts
    - Timelines
    - Count down
@@ -23,6 +24,8 @@ File: Pages
    - Profile
    - Extra pages
    - Account pages
+   - Tree View
+   - Tour
 
 ============= */
 /* =============
@@ -117,13 +120,11 @@ File: Pages
 /* =============
    Form Advanced
 ============= */
-/* Tags input */
+/* Bootstrap tagsinput */
 .bootstrap-tagsinput {
   box-shadow: none;
-  padding: 6px 7px 6px;
+  padding: 3px 7px 6px;
   border: 1px solid #e3e3e3;
-  width: 100%;
-  min-height: 38px;
 }
 .bootstrap-tagsinput .label-info {
   background-color: #5fbeaa !important;
@@ -469,10 +470,6 @@ File: Pages
 .mce-menu-item-normal.mce-active .mce-text {
   color: #ffffff !important;
 }
-/*  Image crop */
-#showDataURL img {
-  width: 100%;
-}
 /* =============
    Notification
 ============= */
@@ -583,10 +580,22 @@ File: Pages
   background-image: none;
   background-color: #4c5667;
 }
+/* =========== */
+/* Sweet Alert */
+/* =========== */
+.sweet-alert p {
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 22px;
+}
+button.confirm {
+  background-color: #5fbeaa !important;
+  box-shadow: none !important;
+}
 /* =============
    Charts
 ============= */
-/* Morris charts */
+/* Morris chart */
 .morris-hover.morris-default-style {
   border-radius: 5px;
   padding: 10px 12px;
@@ -642,7 +651,6 @@ File: Pages
   margin-left: 0.1em;
   font-size: .8em;
 }
-/* Flot chart */
 #flotTip {
   padding: 8px 12px;
   background-color: #36404a;
@@ -1185,9 +1193,6 @@ File: Pages
 /* =============
    Gallery
 ============= */
-.portfolioContainer {
-  margin-bottom: 30px;
-}
 .portfolioFilter a {
   -moz-box-shadow: 0px 1px 2px 0px rgba(0, 0, 0, 0.1);
   -moz-transition: all 0.3s ease-out;
@@ -1347,7 +1352,6 @@ File: Pages
 }
 .price_card {
   -moz-border-radius: 5px;
-  webkit-box-shadow: 0px 1px 2px 0px rgba(0, 0, 0, 0.1);
   -moz-box-shadow: 0px 1px 2px 0px rgba(0, 0, 0, 0.1);
   -webkit-border-radius: 5px;
   background: #fafafa;
@@ -1356,6 +1360,7 @@ File: Pages
   margin-bottom: 30px;
   padding-bottom: 20px;
   position: relative;
+  webkit-box-shadow: 0px 1px 2px 0px rgba(0, 0, 0, 0.1);
 }
 .price_card .name {
   display: block;
@@ -1467,9 +1472,6 @@ File: Pages
 .pr-button {
   margin-top: 30px;
 }
-/* =============
-   Profile
-============= */
 /* =============
    Profile
 ============= */
@@ -1648,6 +1650,67 @@ File: Pages
   right: 0px;
   top: 0px;
   display: none;
+}
+/*  Image crop */
+#showDataURL img {
+  width: 100%;
+}
+/* Switchery demo */
+.switchery-demo .switchery {
+  margin-bottom: 10px;
+}
+/* Chat app */
+.chat-app-list {
+  padding: 0px 20px;
+}
+.chat-app-list .list-group-item {
+  background: transparent;
+}
+.chat-ready .conversation-list {
+  max-height: 800px;
+}
+.chat-ready .spinner {
+  width: 70px;
+  text-align: center;
+}
+.chat-ready .spinner > div {
+  width: 10px;
+  height: 10px;
+  background-color: #E3E3E3;
+  border-radius: 100%;
+  display: inline-block;
+  -webkit-animation: sk-bouncedelay 1.4s infinite ease-in-out both;
+  animation: sk-bouncedelay 1.4s infinite ease-in-out both;
+}
+.chat-ready .spinner .bounce1 {
+  -webkit-animation-delay: -0.32s;
+  animation-delay: -0.32s;
+}
+.chat-ready .spinner .bounce2 {
+  -webkit-animation-delay: -0.16s;
+  animation-delay: -0.16s;
+}
+@-webkit-keyframes sk-bouncedelay {
+  0%,
+  80%,
+  100% {
+    -webkit-transform: scale(0);
+  }
+  40% {
+    -webkit-transform: scale(1);
+  }
+}
+@keyframes sk-bouncedelay {
+  0%,
+  80%,
+  100% {
+    -webkit-transform: scale(0);
+    transform: scale(0);
+  }
+  40% {
+    -webkit-transform: scale(1);
+    transform: scale(1);
+  }
 }
 /* Opportunities page */
 .opport-box .checkbx-detail {

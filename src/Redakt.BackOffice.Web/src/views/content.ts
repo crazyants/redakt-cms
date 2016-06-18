@@ -1,7 +1,7 @@
 import {bindable, autoinject} from 'aurelia-framework';
 import {Router, activationStrategy} from 'aurelia-router';
 import {Page} from '../models/page';
-import {IPageType} from '../models/pagetype';
+import {IPageType} from '../models/interfaces';
 import {PageService, PageTypeService} from '../services/services';
 
 @autoinject

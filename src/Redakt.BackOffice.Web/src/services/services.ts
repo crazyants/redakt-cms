@@ -2,8 +2,7 @@
 import {Api} from '../api';
 import {Site} from '../models/site';
 import {Page} from '../models/page';
-import {ISiteListItem, IPageTreeItem} from '../models/interfaces';
-import {IPageType} from '../models/pagetype';
+import {ISiteListItem, IPageTreeItem, IPageTypeListItem, IPageType} from '../models/interfaces';
 
 @autoinject()
 export class PageTypeService {
@@ -11,6 +10,10 @@ export class PageTypeService {
 
     public getPageType(id: string): Promise<IPageType> {
         return this.api.get('pagetypes/' + id);
+    }
+
+    public getAllPageTypes(): Promise<Array<IPageTypeListItem>> {
+        return this.api.get('pagetypes/list');
     }
 
     public updatePageType(pageType: IPageType): Promise<void> {

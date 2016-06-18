@@ -1,13 +1,22 @@
 <template>
-    <require from='components/nav-header.html'></require>
+    <require from='components/nav-topbar.html'></require>
+    <require from='components/nav-menu.html'></require>
     <require from='components/nav-footer.html'></require>
 
-    <nav-header router.bind="router"></nav-header>
     <div class="wrapper">
-        <div class="container">
-            <router-view></router-view>
+        <nav-topbar router.bind="router"></nav-topbar>
+        <nav-menu router.bind="router"></nav-menu>
 
-            <nav-footer></nav-footer>
+        <div class="content-page">
+            <div class="content">
+                <div class="container">
+                    <router-view></router-view>
+                </div>
+            </div>
+
+            <footer class="footer">
+                2016 &copy; Redakt.
+            </footer>
         </div>
     </div>
 </template>

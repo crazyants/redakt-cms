@@ -20,10 +20,8 @@ File: Components
    - Tables
    - Widgets
    - Form elements
-   - Sweet Alert
 
 ============= */
-
 
 /* =============
    Buttons
@@ -37,21 +35,14 @@ File: Components
   padding: 8px 16px;
 }
 
-.btn-primary, .btn-success,.btn-default, .btn-info,
-.btn-warning, .btn-danger, .btn-inverse, .btn-purple,
-.btn-pink {
+.btn-primary, .btn-success,.btn-default, .btn-info, .btn-warning, .btn-danger, .btn-inverse, .btn-purple, .btn-pink {
   color: @white !important;
 }
-.btn-default, .btn-default:hover, .btn-default:focus,
-.btn-default:active, .btn-default.active, .btn-default.focus,
-.btn-default:active, .btn-default:focus, .btn-default:hover,
-.open > .dropdown-toggle.btn-default {
+.btn-default, .btn-default:hover, .btn-default:focus, .btn-default:active, .btn-default.active, .btn-default.focus, .btn-default:active, .btn-default:focus, .btn-default:hover, .open > .dropdown-toggle.btn-default {
   background-color: @custom !important;
   border: 1px solid @custom !important;
 }
-.btn-white, .btn-white:hover, .btn-white:focus, .btn-white:active,
-.btn-white.active, .btn-white.focus, .btn-white:active, .btn-white:focus,
-.btn-white:hover, .open > .dropdown-toggle.btn-white {
+.btn-white, .btn-white:hover, .btn-white:focus, .btn-white:active, .btn-white.active, .btn-white.focus, .btn-white:active, .btn-white:focus, .btn-white:hover, .open > .dropdown-toggle.btn-white {
   border: 1px solid #eaeaea !important;
   background-color: @white;
   color: @inverse;
@@ -67,44 +58,32 @@ File: Components
   }
 }
 
-.btn-primary, .btn-primary:hover, .btn-primary:focus, .btn-primary:active,
-.btn-primary.active, .btn-primary.focus, .btn-primary:active, .btn-primary:focus,
-.btn-primary:hover, .open > .dropdown-toggle.btn-primary {
+.btn-primary, .btn-primary:hover, .btn-primary:focus, .btn-primary:active, .btn-primary.active, .btn-primary.focus, .btn-primary:active, .btn-primary:focus, .btn-primary:hover, .open > .dropdown-toggle.btn-primary {
   background-color: @primary !important;
   border: 1px solid @primary !important;
 }
 
-.btn-success, .btn-success:hover, .btn-success:focus, .btn-success:active,
-.btn-success.active, .btn-success.focus, .btn-success:active, .btn-success:focus,
-.btn-success:hover, .open > .dropdown-toggle.btn-success {
+.btn-success, .btn-success:hover, .btn-success:focus, .btn-success:active, .btn-success.active, .btn-success.focus, .btn-success:active, .btn-success:focus, .btn-success:hover, .open > .dropdown-toggle.btn-success {
   background-color: @success !important;
   border: 1px solid @success !important;
 }
 
-.btn-info, .btn-info:hover, .btn-info:focus, .btn-info:active, .btn-info.active,
-.btn-info.focus, .btn-info:active, .btn-info:focus, .btn-info:hover,
-.open > .dropdown-toggle.btn-info {
+.btn-info, .btn-info:hover, .btn-info:focus, .btn-info:active, .btn-info.active, .btn-info.focus, .btn-info:active, .btn-info:focus, .btn-info:hover, .open > .dropdown-toggle.btn-info {
   background-color: @info !important;
   border: 1px solid @info !important;
 }
 
-.btn-warning, .btn-warning:hover, .btn-warning:focus, .btn-warning:active,
-.btn-warning.active, .btn-warning.focus, .btn-warning:active, .btn-warning:focus,
-.btn-warning:hover, .open > .dropdown-toggle.btn-warning {
+.btn-warning, .btn-warning:hover, .btn-warning:focus, .btn-warning:active, .btn-warning.active, .btn-warning.focus, .btn-warning:active, .btn-warning:focus, .btn-warning:hover, .open > .dropdown-toggle.btn-warning {
   background-color: @warning !important;
   border: 1px solid @warning !important;
 }
 
-.btn-danger, .btn-danger:active, .btn-danger:focus, .btn-danger:hover,
-.btn-danger.active, .btn-danger.focus, .btn-danger:active, .btn-danger:focus,
-.btn-danger:hover, .open > .dropdown-toggle.btn-danger {
+.btn-danger, .btn-danger:active, .btn-danger:focus, .btn-danger:hover, .btn-danger.active, .btn-danger.focus, .btn-danger:active, .btn-danger:focus, .btn-danger:hover, .open > .dropdown-toggle.btn-danger {
   background-color: @danger !important;
   border: 1px solid @danger !important;
 }
 
-.btn-inverse, .btn-inverse:hover, .btn-inverse:focus, .btn-inverse:active,
-.btn-inverse.active, .btn-inverse.focus, .btn-inverse:active, .btn-inverse:focus,
-.btn-inverse:hover, .open > .dropdown-toggle.btn-inverse {
+.btn-inverse, .btn-inverse:hover, .btn-inverse:focus, .btn-inverse:active, .btn-inverse.active, .btn-inverse.focus, .btn-inverse:active, .btn-inverse:focus, .btn-inverse:hover, .open > .dropdown-toggle.btn-inverse {
   background-color: @inverse !important;
   border: 1px solid @inverse !important;
   color: @white;
@@ -563,6 +542,7 @@ File: Components
   input[type="radio"]:focus + label {
     &::before {
       outline-offset: -2px;
+      outline: 5px auto -webkit-focus-ring-color;
       outline: thin dotted;
     }
   }
@@ -590,6 +570,7 @@ File: Components
     height: 17px;
   }
 }
+
 
 .radio-custom {
   input[type="radio"] + label {
@@ -808,7 +789,7 @@ File: Components
 }
 
 
-//Panel border
+
 .panel-border .panel-heading {
   background-color: @white;
   border-top: 3px solid #DADFE2 !important;
@@ -864,7 +845,7 @@ File: Components
   color: @inverse !important;
 }
 
-//Panel group
+
 .panel-group {
   .panel {
     .panel-heading {
@@ -1058,6 +1039,7 @@ File: Components
 /* =============
    Progressbars
 ============= */
+
 
 .progress {
   -webkit-box-shadow: none !important;
@@ -1352,7 +1334,6 @@ table.focus-on {
     background-color: #F4F8FB;
 }
 
-
 .modal-block {
   background: transparent;
   margin: 40px auto;
@@ -1512,10 +1493,7 @@ table[data-toggle="table"] {
     top: 60px !important;
   }
   /* Key Table */
-  table.dataTable th.focus,table.dataTable td.focus{
-    outline:3px solid @custom !important;
-    outline-offset:-1px
-  }
+  table.dataTable th.focus,table.dataTable td.focus{outline:3px solid @custom !important;outline-offset:-1px}
 
   /* ColVid Tables */
   div.ColVis {
@@ -1556,9 +1534,8 @@ table[data-toggle="table"] {
   }
 
 
-
 /* =============
-   Widget
+   Widgets
 ============= */
 
 /* Widget-box styles */
@@ -1840,7 +1817,6 @@ table[data-toggle="table"] {
 
 .todo-list {
   li {
-    border-bottom: 1px solid #eeeeee;
     border-radius: 0px;
     border: 0px;
     margin: 0px;
@@ -1867,7 +1843,6 @@ table[data-toggle="table"] {
     }
   }
 }
-
 
 .widget-panel {
   padding: 30px 20px;
@@ -1896,7 +1871,7 @@ table[data-toggle="table"] {
   }
 }
 
-/* Google maps */
+/* Google maps widget*/
 
 .gmap iframe{
   width: 100%;
@@ -1923,8 +1898,6 @@ table[data-toggle="table"] {
 }
 .gmap-buttons .btn { margin-left: 3px;}
 /* Google maps ends */
-
-
 
 
 /* Table with Action */
@@ -1999,6 +1972,7 @@ table[data-toggle="table"] {
   }
 }
 
+
 /* Profile widget */
 
 .profile-widget {
@@ -2023,6 +1997,7 @@ table[data-toggle="table"] {
   }
 }
 
+
 /*  Bar widget */
 
 .bar-widget {
@@ -2041,7 +2016,6 @@ table[data-toggle="table"] {
     }
   }
 }
-
 
 /* Social type widgets */
 .widget-profile-one {
@@ -2156,10 +2130,10 @@ table[data-toggle="table"] {
   }
 }
 
-
 /* =============
    Form elements
 ============= */
+
 
 .error {
   color: @danger;
@@ -2167,7 +2141,24 @@ table[data-toggle="table"] {
   font-weight: 500;
 }
 
-//Datepicker
+/* Form validation */
+.parsley-error {
+  border-color: @danger !important;
+}
+.parsley-errors-list {
+  display: none;
+  margin: 0;
+  padding: 0;
+}
+.parsley-errors-list.filled {
+  display: block;
+}
+.parsley-errors-list > li {
+  font-size: 12px;
+  list-style: none;
+  color: #f6504d;
+}
+/* Datepicker */
 .datepicker {
   padding: 8px;
   th {
@@ -2231,6 +2222,7 @@ table[data-toggle="table"] {
       border: 1px solid @primary;
 }
 
+
 .search-input {
   margin-bottom: 10px;
 }
@@ -2256,23 +2248,6 @@ table[data-toggle="table"] {
   }
 }
 
-//Form validation
-.parsley-error {
-  border-color: @danger !important;
-}
-.parsley-errors-list {
-  display: none;
-  margin: 0;
-  padding: 0;
-}
-.parsley-errors-list.filled {
-  display: block;
-}
-.parsley-errors-list > li {
-  font-size: 12px;
-  list-style: none;
-  color: #f6504d;
-}
 
 .note-editor {
   border: 1px solid @light;
@@ -2322,7 +2297,7 @@ table[data-toggle="table"] {
   background-color: @inverse !important;
   box-shadow: none;
 }
-
+/* Timepicker */
 .bootstrap-timepicker-widget {
   table {
     td {
@@ -2344,7 +2319,7 @@ table[data-toggle="table"] {
     padding: 9px 30px;
   }
 }
-// Form wizard
+/* Wizard */
 .wizard > .content {
   background: @white;
   min-height: 240px;
@@ -2354,6 +2329,7 @@ table[data-toggle="table"] {
 .wizard > .content > .body {
   padding: 0px;
   position: relative;
+  
   input {
     border: 1px solid #E3E3E3;
   }
@@ -2477,6 +2453,8 @@ table[data-toggle="table"] {
   }
 }
 
+
+
 /* Dropzone */
 .dropzone {
   min-height: 230px;
@@ -2493,6 +2471,7 @@ table[data-toggle="table"] {
 .editable-click, a.editable-click, a.editable-click:hover{
   border: none;
 }
+
 
 /* AUTOCOMPLETE */
 .autocomplete-suggestions {
@@ -2537,6 +2516,7 @@ table[data-toggle="table"] {
 }
 
 /* Image crop */
+
 .img-container,
 .img-preview {
   background-color: #f7f7f7;
@@ -2574,20 +2554,4 @@ table[data-toggle="table"] {
 
 .img-preview > img {
   max-width: 100%;
-}
-
-/* =============
-   Sweet Alert
-============= */
-
-.sweet-alert {
-  p {
-    font-size: 14px;
-    font-weight: 400;
-    line-height: 22px;
-  }
-}
-button.confirm {
-  background-color: @custom !important;
-  box-shadow: none !important;
 }

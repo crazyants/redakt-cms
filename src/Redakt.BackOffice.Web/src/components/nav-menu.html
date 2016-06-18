@@ -1,0 +1,29 @@
+<template bindable="router">
+    <div class="left side-menu">
+        <div class="sidebar-inner">
+            <div id="sidebar-menu">
+                <ul>
+                    <li class="text-muted menu-title">Navigation</li>
+
+                    <li>
+                        <a route-href="route: dashboard" class="${router.currentInstruction.config.name == 'dashboard' ? 'subdrop' : ''}"><i class="ti-home"></i> <span> Dashboard </span> </a>
+                    </li>
+                    <li>
+                        <a route-href="route: pages" class="${router.currentInstruction.config.name == 'pages' ? 'subdrop' : ''}"><i class="ti-pencil-alt"></i><span> Content </span> </a>
+                    </li>
+                    <li>
+                        <a route-href="route: resources" class="${router.currentInstruction.config.name == 'resources' ? 'subdrop' : ''}"><i class="ti-server"></i><span> Resources </span> </a>
+                    </li>
+                    <li>
+                        <a href="#" class="${router.currentInstruction.config.group == 'configuration' ? 'subdrop' : ''}" click.trigger="this.visible = !this.visible"><i class="ti-settings"></i> <span> Configuration </span> </a>
+                        <ul class="list-unstyled" show.bind="this.visible" style="display: block;">
+                            <li class="${router.currentInstruction.config.name == 'pagetypes' ? 'active' : ''}"><a route-href="route: pagetypes">Page Types</a></li>
+                        </ul>
+                    </li>
+                </ul>
+                <div class="clearfix"></div>
+            </div>
+            <div class="clearfix"></div>
+        </div>
+    </div>
+</template>

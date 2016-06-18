@@ -15,7 +15,6 @@ File: Components
    - Tables
    - Widgets
    - Form elements
-   - Sweet Alert
 
 ============= */
 /* =============
@@ -557,6 +556,7 @@ File: Components
 }
 .radio input[type="radio"]:focus + label::before {
   outline-offset: -2px;
+  outline: 5px auto -webkit-focus-ring-color;
   outline: thin dotted;
 }
 .radio input[type="radio"]:checked + label::after {
@@ -1368,7 +1368,7 @@ ul.ColVis_collection li {
   float: left;
 }
 /* =============
-   Widget
+   Widgets
 ============= */
 /* Widget-box styles */
 .widget-box-1 i.inform {
@@ -1614,7 +1614,6 @@ ul.ColVis_collection li {
   font-size: 16px;
 }
 .todo-list li {
-  border-bottom: 1px solid #eeeeee;
   border-radius: 0px;
   border: 0px;
   margin: 0px;
@@ -1655,7 +1654,7 @@ ul.ColVis_collection li {
   font-size: 48px;
   padding: 30px 40px;
 }
-/* Google maps */
+/* Google maps widget*/
 .gmap iframe {
   width: 100%;
   margin: 0px !important;
@@ -1877,6 +1876,24 @@ ul.ColVis_collection li {
   font-size: 12px;
   font-weight: 500;
 }
+/* Form validation */
+.parsley-error {
+  border-color: #f05050 !important;
+}
+.parsley-errors-list {
+  display: none;
+  margin: 0;
+  padding: 0;
+}
+.parsley-errors-list.filled {
+  display: block;
+}
+.parsley-errors-list > li {
+  font-size: 12px;
+  list-style: none;
+  color: #f6504d;
+}
+/* Datepicker */
 .datepicker {
   padding: 8px;
 }
@@ -1981,22 +1998,6 @@ ul.ColVis_collection li {
 .ms-container .ms-selection li.ms-hover {
   background-color: #5d9cec;
 }
-.parsley-error {
-  border-color: #f05050 !important;
-}
-.parsley-errors-list {
-  display: none;
-  margin: 0;
-  padding: 0;
-}
-.parsley-errors-list.filled {
-  display: block;
-}
-.parsley-errors-list > li {
-  font-size: 12px;
-  list-style: none;
-  color: #f6504d;
-}
 .note-editor {
   border: 1px solid #eeeeee;
   position: relative;
@@ -2034,6 +2035,7 @@ ul.ColVis_collection li {
   background-color: #4c5667 !important;
   box-shadow: none;
 }
+/* Timepicker */
 .bootstrap-timepicker-widget table td a:hover {
   background-color: transparent;
   border-color: transparent;
@@ -2044,6 +2046,7 @@ ul.ColVis_collection li {
 .editor-horizontal .popover-content {
   padding: 9px 30px;
 }
+/* Wizard */
 .wizard > .content {
   background: #ffffff;
   min-height: 240px;
@@ -2244,16 +2247,4 @@ a.editable-click:hover {
 }
 .img-preview > img {
   max-width: 100%;
-}
-/* =============
-   Sweet Alert
-============= */
-.sweet-alert p {
-  font-size: 14px;
-  font-weight: 400;
-  line-height: 22px;
-}
-button.confirm {
-  background-color: #5fbeaa !important;
-  box-shadow: none !important;
 }

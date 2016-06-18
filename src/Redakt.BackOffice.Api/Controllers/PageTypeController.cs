@@ -30,6 +30,13 @@ namespace Redakt.BackOffice.Api.Controllers
             return Ok(page);
         }
 
+        [HttpGet("list")]
+        public async Task<IActionResult> GetPageTypes()
+        {
+            var pageTypes = await _pageTypeService.GetAll();
+            return Ok(pageTypes.Select(pt => new PageTypeListItem(pt)));
+        }
+
         [HttpPost("")]
         public async Task<IActionResult> CreatePageType(PageType pageType)
         {

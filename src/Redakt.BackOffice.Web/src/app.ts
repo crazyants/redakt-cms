@@ -16,7 +16,9 @@ export class App {
             { name: 'dashboard', route: ['', 'dashboard'], moduleId: './views/dashboard', nav: true, title: 'Dashboard', icon: 'dashboard' },
             { name: 'pages', route: 'pages', moduleId: './views/pages', nav: true, title: 'Content', icon: 'content-copy' },
             { name: 'page', route: 'pages/:id', moduleId: './views/pages', nav: false, title: 'Content', icon: 'content-copy' },
-            { name: 'resources', route: 'resources', moduleId: './views/dashboard', nav: true, title: 'Resources', icon: 'attachment' }
+            { name: 'resources', route: 'resources', moduleId: './views/dashboard', nav: true, title: 'Resources', icon: 'attachment' },
+            { name: 'pagetypes', route: 'pagetypes', moduleId: './views/pagetypes', nav: true, title: 'Page Types', group: 'configuration' },
+            { name: 'pagetype', route: 'pagetypes/:id', moduleId: './views/pagetypes', nav: false, title: 'Page Types', group: 'configuration' }
         ]);
 
         this.router = router;

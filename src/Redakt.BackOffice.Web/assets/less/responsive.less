@@ -10,8 +10,17 @@ Email: coderthemes@gmail.com
 File: Responsive
 */
 
+@media only screen and (max-width: 6000px) and (min-width: 700px) {
+  .wrapper.right-bar-enabled {
+    .right-bar {
+      right: 0;
+      z-index: 99;
+    }
+  }
+}
 
 @media (min-width: 768px) and (max-width: 1024px) {
+
   .email-msg {
     display: none;
   }
@@ -26,6 +35,18 @@ File: Responsive
 @media (max-width: 767px) {
   body {
     overflow-x: hidden;
+  }
+
+  .enlarged {
+    .left.side-menu {
+      margin-left: -75px;
+    }
+  }
+  .content-page {
+    margin-left: 0px !important;
+  }
+  .footer {
+    left: 0px !important;
   }
 
   .mobile-sidebar {
@@ -99,12 +120,6 @@ File: Responsive
       text-align: left;
     }
   }
-  .ms-container {
-    width: 100%;
-  }
-  .email-msg {
-    display: none;
-  }
 }
 
 @media (max-width: 480px) {
@@ -149,7 +164,15 @@ File: Responsive
   .topbar-left {
     width: 70px !important;
   }
-
+  .logo {
+    .icon-c-logo {
+      display: inline-block !important;
+      line-height: 58px !important;
+    }
+    span {
+      display: none !important;
+    }
+  }
   .content-page {
     margin-left: 70px;
   }

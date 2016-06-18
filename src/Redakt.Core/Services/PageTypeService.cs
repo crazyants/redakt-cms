@@ -13,6 +13,7 @@ namespace Redakt.Core.Services
     public interface IPageTypeService
     {
         Task<PageType> Get(string id);
+        Task<IList<PageType>> GetAll();
         Task Save(PageType pageType);
     }
 
@@ -30,6 +31,11 @@ namespace Redakt.Core.Services
         public Task<PageType> Get(string id)
         {
             return _cache.AddOrGetExistingAsync(id, s => _pageTypeRepository.GetAsync(s));
+        }
+
+        public Task<IList<PageType>> GetAll()
+        {
+            return _pageTypeRepository.FindAsync(s => true);
         }
 
         public Task Save(PageType pageType)
