@@ -1,39 +1,117 @@
 <template>
-    <div class="card-box m-b-0">
-        <h4 class="header-title m-t-0 m-b-20">${pageType.name}</h4>
+    <h4 class="header-title m-b-20">${pageType.name}</h4>
+    <ul class="nav nav-tabs navtab-bg">
+        <li class="${selectedTab == 'settings' ? 'active' : ''}">
+            <a click.trigger="selectedTab = 'settings'" data-toggle="tab">
+                <span class="visible-xs"><i class="fa fa-home"></i></span>
+                <span class="hidden-xs">Settings</span>
+            </a>
+        </li>
+        <li class="${selectedTab == 'inheritance' ? 'active' : ''}">
+            <a click.trigger="selectedTab = 'inheritance'" data-toggle="tab">
+                <span class="visible-xs"><i class="fa fa-user"></i></span>
+                <span class="hidden-xs">Inheritance</span>
+            </a>
+        </li>
+        <li class="${selectedTab == 'fields' ? 'active' : ''}">
+            <a click.trigger="selectedTab = 'fields'" data-toggle="tab">
+                <span class="visible-xs"><i class="fa fa-envelope-o"></i></span>
+                <span class="hidden-xs">Fields</span>
+            </a>
+        </li>
+        <li class="${selectedTab == 'layout' ? 'active' : ''}">
+            <a click.trigger="selectedTab = 'layout'" data-toggle="tab">
+                <span class="visible-xs"><i class="fa fa-envelope-o"></i></span>
+                <span class="hidden-xs">Layout</span>
+            </a>
+        </li>
+    </ul>
 
-        <form class="form-horizontal" role="form">
-            <div class="form-group">
-                <label class="col-md-2 control-label">Name</label>
-                <div class="col-md-10">
-                    <input type="text" class="form-control" value.bind="pageType.name">
+    <div class="tab-content">
+        <div class="tab-pane active" if.bind="selectedTab == 'settings'">
+            <form class="form-horizontal" role="form">
+                <div class="form-group">
+                    <label class="col-md-2 control-label">Name</label>
+                    <div class="col-md-10">
+                        <input type="text" class="form-control" value.bind="pageType.name">
+                    </div>
                 </div>
-            </div>
-            <div class="form-group">
-                <label class="col-md-2 control-label" for="example-email">Email</label>
-                <div class="col-md-10">
-                    <input type="email" id="example-email" name="example-email" class="form-control" placeholder="Email">
+                <div class="form-group">
+                    <label class="col-md-2 control-label" for="example-email">Email</label>
+                    <div class="col-md-10">
+                        <input type="email" id="example-email" name="example-email" class="form-control" placeholder="Email">
+                    </div>
                 </div>
-            </div>
-            <div class="form-group">
-                <label class="col-md-2 control-label">Password</label>
-                <div class="col-md-10">
-                    <input type="password" class="form-control" value="password">
+                <div class="form-group">
+                    <label class="col-md-2 control-label">Password</label>
+                    <div class="col-md-10">
+                        <input type="password" class="form-control" value="password">
+                    </div>
                 </div>
-            </div>
 
-            <div class="form-group">
-                <label class="col-md-2 control-label">Placeholder</label>
-                <div class="col-md-10">
-                    <input type="text" class="form-control" placeholder="placeholder">
+                <div class="form-group">
+                    <label class="col-md-2 control-label">Placeholder</label>
+                    <div class="col-md-10">
+                        <input type="text" class="form-control" placeholder="placeholder">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-md-2 control-label">Text area</label>
+                    <div class="col-md-10">
+                        <textarea class="form-control" rows="5"></textarea>
+                    </div>
+                </div>
+            </form>
+        </div>
+
+        <div class="tab-pane active" if.bind="selectedTab == 'inheritance'">
+            <p>Donec pede justo, fringilla vel, aliquet nec, vulputate eget, arcu. In enim justo, rhoncus ut, imperdiet a, venenatis vitae, justo. Nullam dictum felis eu pede mollis pretium. Integer tincidunt.Cras dapibus. Vivamus elementum semper nisi. Aenean vulputate eleifend tellus. Aenean leo ligula, porttitor eu, consequat vitae, eleifend ac, enim.</p>
+            <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim.</p>
+        </div>
+
+        <div class="tab-pane active" if.bind="selectedTab == 'fields'">
+            <div class="panel-group">
+                <div class="panel panel-default" repeat.for="field of pageType.fields">
+                    <div class="panel-heading">
+                        <h4 class="panel-title" style="text-transform: none;">
+                            <a class="collapsed" aria-expanded="false" href="#field-${field.id}" data-toggle="collapse">
+                                ${field.label}
+                            </a>
+                        </h4>
+                    </div>
+                    <div class="panel-collapse collapse" id="field-${field.id}" aria-expanded="false" style="height: 0px;">
+                        <div class="panel-body">
+                            <form class="form-horizontal" role="form">
+                                <div class="form-group">
+                                    <label class="col-md-2 control-label">Key</label>
+                                    <div class="col-md-10">
+                                        <input type="text" class="form-control" value.bind="field.key">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-md-2 control-label" for="example-email">Display Name</label>
+                                    <div class="col-md-10">
+                                        <input type="text" class="form-control" value.bind="field.label">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-md-2 control-label">Group</label>
+                                    <div class="col-md-10">
+                                        <input type="text" class="form-control" value.bind="field.groupName">
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label class="col-md-2 control-label">Section</label>
+                                    <div class="col-md-10">
+                                        <input type="text" class="form-control" value.bind="field.sectionName">
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
                 </div>
             </div>
-            <div class="form-group">
-                <label class="col-md-2 control-label">Text area</label>
-                <div class="col-md-10">
-                    <textarea class="form-control" rows="5"></textarea>
-                </div>
-            </div>
-        </form>
+        </div>
     </div>
 </template>

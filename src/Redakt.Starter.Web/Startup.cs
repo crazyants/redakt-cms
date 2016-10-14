@@ -32,14 +32,16 @@ namespace Redakt.Starter.Web
 
             services.AddMvc(options =>
             {
-                options.InputFormatters.Clear();
+                //options.InputFormatters.Clear();
 
-                var jsonOutputFormatter = new JsonOutputFormatter();
-                jsonOutputFormatter.SerializerSettings.ContractResolver = new CamelCasePropertyNamesContractResolver();
-                jsonOutputFormatter.SerializerSettings.DefaultValueHandling = Newtonsoft.Json.DefaultValueHandling.Ignore;
+                //var serializerSettings = JsonSerializerSettingsProvider.CreateSerializerSettings();
+                //serializerSettings.ContractResolver = new CamelCasePropertyNamesContractResolver();
+                //serializerSettings.DefaultValueHandling = Newtonsoft.Json.DefaultValueHandling.Ignore;
 
-                options.OutputFormatters.RemoveType<JsonOutputFormatter>(); //.RemoveAll(formatter => formatter.Instance.GetType() == typeof(JsonOutputFormatter));
-                options.OutputFormatters.Insert(0, jsonOutputFormatter);
+                //var jsonOutputFormatter = new JsonOutputFormatter(serializerSettings);
+
+                //options.OutputFormatters.RemoveType<JsonOutputFormatter>(); //.RemoveAll(formatter => formatter.Instance.GetType() == typeof(JsonOutputFormatter));
+                //options.OutputFormatters.Insert(0, jsonOutputFormatter);
             });
 
             services.AddCors(options =>

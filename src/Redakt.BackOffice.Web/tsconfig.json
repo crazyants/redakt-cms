@@ -1,8 +1,6 @@
 {
   "compileOnSave": false,
   "compilerOptions": {
-    "rootDir": "src",
-    "outDir": "dist",
     "sourceMap": true,
     "target": "es5",
     "module": "amd",
@@ -12,19 +10,16 @@
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
     "moduleResolution": "node",
-    "lib": ["es6", "dom"]
+    "lib": ["es2015", "dom"]
   },
+  "exclude": [
+    "node_modules"
+  ],
   "filesGlob": [
     "./src/**/*.ts",
     "./test/**/*.ts",
     "./typings/index.d.ts",
-    "./custom_typings/**/*.d.ts",
-    "./jspm_packages/**/*.d.ts"
-  ],
-  "exclude": [
-    "node_modules",
-    "jspm_packages",
-    "test"
+    "./custom_typings/**/*.d.ts"
   ],
   "atom": {
     "rewriteTsconfig": false

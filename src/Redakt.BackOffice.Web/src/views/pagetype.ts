@@ -6,6 +6,7 @@ import {PageTypeService} from '../services/services';
 @autoinject
 export class PageTypeView {
     private pageType: PageType;
+    public selectedTab = 'settings';
 
     constructor(private router: Router, private pageTypeService: PageTypeService) {
     }

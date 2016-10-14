@@ -1220,6 +1220,40 @@ div.dataTables_info {
 div#datatable-buttons_info {
   float: left;
 }
+table.dataTable thead th {
+  position: relative;
+  background-image: none !important;
+}
+table.dataTable thead th.sorting:after,
+table.dataTable thead th.sorting_asc:after,
+table.dataTable thead th.sorting_desc:after {
+  position: absolute;
+  top: 7px;
+  right: 8px;
+  display: block;
+  font-family: FontAwesome;
+}
+table.dataTable thead th.sorting:after {
+  content: "\f0dc";
+  padding-top: 0.12em;
+}
+table.dataTable thead th.sorting_asc:after {
+  content: "\f0de";
+}
+table.dataTable thead th.sorting_desc:after {
+  content: "\f0dd";
+}
+.DTFC_LeftBodyWrapper table thead th.sorting:after,
+.dataTables_scrollBody table thead th.sorting:after,
+.DTFC_RightBodyLiner table thead th.sorting:after,
+.DTFC_LeftBodyWrapper table thead th.sorting_asc:after,
+.dataTables_scrollBody table thead th.sorting_asc:after,
+.DTFC_RightBodyLiner table thead th.sorting_asc:after,
+.DTFC_LeftBodyWrapper table thead th.sorting_desc:after,
+.dataTables_scrollBody table thead th.sorting_desc:after,
+.DTFC_RightBodyLiner table thead th.sorting_desc:after {
+  display: none !important;
+}
 /* Footable */
 .footable-odd {
   background-color: #ffffff;
@@ -1366,6 +1400,83 @@ ul.ColVis_collection li {
 }
 #datatable-colvid_info {
   float: left;
+}
+/* JsGrid table */
+.jsgrid-cell {
+  padding: .8em;
+}
+.jsgrid-selected-row > .jsgrid-cell {
+  background: #f2f2f2;
+  border-color: #ededed;
+}
+.jsgrid-selected-row > .jsgrid-cell .jsgrid-button {
+  background-color: rgba(54, 64, 74, 0.1);
+}
+.jsgrid-edit-row > .jsgrid-cell,
+.jsgrid-insert-row > .jsgrid-cell {
+  background: #f2f2f2;
+}
+.jsgrid-edit-row > .jsgrid-cell .jsgrid-button,
+.jsgrid-insert-row > .jsgrid-cell .jsgrid-button {
+  background-color: rgba(54, 64, 74, 0.1);
+}
+.jsgrid input,
+.jsgrid select,
+.jsgrid textarea {
+  border: 1px solid #e1e1e1;
+  padding: .4em .6em;
+}
+.jsgrid-pager-container {
+  margin-top: 10px;
+}
+.jsgrid-pager-page {
+  padding: 0;
+  margin: 0 2px;
+}
+.jsgrid-pager-page a,
+.jsgrid-pager-current-page {
+  background-color: #eee;
+  border-radius: 50%;
+  height: 24px;
+  width: 24px;
+  display: inline-block;
+  text-align: center;
+  line-height: 24px;
+  color: #797979;
+}
+.jsgrid-pager-page.jsgrid-pager-current-page {
+  background-color: #5fbeaa;
+  color: #ffffff;
+}
+.jsgrid-pager-nav-button a {
+  color: #797979;
+  font-weight: 600;
+}
+.jsgrid-pager-nav-button a:hover {
+  color: #5fbeaa;
+}
+.jsgrid .jsgrid-button {
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  background-image: url("../images/download.png");
+  background-color: #eee;
+}
+.jsgrid .jsgrid-button:hover {
+  opacity: 0.9;
+  background-color: rgba(54, 64, 74, 0.2);
+}
+.jsgrid-search-mode-button {
+  background-position: 0 -295px;
+}
+.jsgrid-insert-button {
+  background-position: 0 -160px;
+}
+.jsgrid-header-sort:before {
+  position: absolute;
+}
+.jsgrid-header-cell {
+  text-align: center !important;
 }
 /* =============
    Widgets
@@ -1981,6 +2092,7 @@ ul.ColVis_collection li {
 .daterangepicker .ranges li:hover {
   background-color: #5d9cec;
   border: 1px solid #5d9cec;
+  color: #ffffff;
 }
 .search-input {
   margin-bottom: 10px;
@@ -1999,7 +2111,7 @@ ul.ColVis_collection li {
   background-color: #5d9cec;
 }
 .note-editor {
-  border: 1px solid #eeeeee;
+  border: 1px solid #eeeeee !important;
   position: relative;
 }
 .note-editor .note-toolbar {

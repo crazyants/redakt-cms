@@ -90,6 +90,15 @@ File: Responsive
     width: 100%;
     text-align: left;
   }
+  .product-search {
+    margin-bottom: 30px;
+  }
+  .top-menu-item-xs {
+    display: inline-flex !important;
+  }
+  .dropdown-menu-lg {
+    width: 240px !important;
+  }
 }
 @media (max-width: 480px) {
   .side-menu {
@@ -100,6 +109,9 @@ File: Responsive
   }
   .search-bar {
     display: none !important;
+  }
+  .ms-container {
+    width: 100%;
   }
 }
 @media (max-width: 420px) {
@@ -142,5 +154,9 @@ File: Responsive
   }
   .enlarged .side-menu.left {
     box-shadow: 0 1px 1px rgba(0, 0, 0, 0.1) !important;
+  }
+  .conversation-list .conversation-text,
+  .conversation-list .odd .conversation-text {
+    width: 100% !important;
   }
 }

@@ -6,7 +6,9 @@
     <meta name="description" content="Redakt Content Management System.">
     <meta name="author" content="Redakt">
     <link rel="shortcut icon" href="assets/images/redakt-favicon.png">
-    <link rel="stylesheet" href="jspm_packages/github/twbs/bootstrap@3.3.6/css/bootstrap.css">
+    <link rel="stylesheet" href="node_modules/bootstrap/dist/css/bootstrap.min.css" />
+    <!--<link rel="stylesheet" href="node_modules/select2/dist/css/select2.min.css" />-->
+    <link rel="stylesheet" href="node_modules/font-awesome/css/font-awesome.min.css" />
     <link rel="stylesheet" href="assets/css/core.css">
     <link rel="stylesheet" href="assets/css/components.css">
     <link rel="stylesheet" href="assets/css/icons.css">
@@ -16,9 +18,8 @@
     <title>Redakt CMS</title>
 </head>
 <body class="fixed-left" aurelia-app="main">
-    <script src="assets/js/jquery.min.js"></script>
-    <script src="assets/js/jquery.core.js"></script>
-    <script src="assets/js/jquery.app.js"></script>
+    <!--<script src="assets/js/jquery.core.js"></script>
+    <script src="assets/js/jquery.app.js"></script>-->
     <!--<script src="assets/js/bootstrap.min.js"></script>-->
     <!--<script src="assets/js/detect.js"></script>-->
     <!--<script src="assets/js/fastclick.js"></script>-->
@@ -30,10 +31,6 @@
     <!--<script src="assets/js/jquery.scrollTo.min.js"></script>-->
     <!--<script src="assets/js/jquery.core.js"></script>-->
     <!--<script src="assets/js/jquery.app.js"></script>-->
-    <script src="jspm_packages/system.js"></script>
-    <script src="config.js"></script>
-    <script>
-      System.import('aurelia-bootstrapper');
-    </script>
+    <script src="scripts\vendor-bundle.js" data-main="aurelia-bootstrapper"></script>
 </body>
 </html>

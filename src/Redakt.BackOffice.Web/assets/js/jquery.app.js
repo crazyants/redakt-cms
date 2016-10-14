@@ -145,7 +145,7 @@ function($) {
     "use strict";
     
     var App = function() {
-        this.VERSION = "1.3.0",
+        this.VERSION = "1.6.0",
         this.AUTHOR = "Coderthemes", 
         this.SUPPORT = "coderthemes@gmail.com", 
         this.pageScrollElement = "html, body", 
@@ -154,16 +154,16 @@ function($) {
     
      //on doc load
     App.prototype.onDocReady = function(e) {
-      //FastClick.attach(document.body);
-      //resizefunc.push("initscrolls");
-      //resizefunc.push("changeptype");
+      FastClick.attach(document.body);
+      resizefunc.push("initscrolls");
+      resizefunc.push("changeptype");
 
       $('.animate-number').each(function(){
         $(this).animateNumbers($(this).attr("data-value"), true, parseInt($(this).attr("data-duration"))); 
       });
     
       //RUN RESIZE ITEMS
-      //$(window).resize(debounce(resizeitems,100));
+      $(window).resize(debounce(resizeitems,100));
       $("body").trigger("resize");
 
       // right side-bar toggle
@@ -259,13 +259,13 @@ var debounce = function(func, wait, immediate) {
   };
 }
 
-//function resizeitems(){
-//  if($.isArray(resizefunc)){  
-//    for (i = 0; i < resizefunc.length; i++) {
-//        window[resizefunc[i]]();
-//    }
-//  }
-//}
+function resizeitems(){
+  if($.isArray(resizefunc)){  
+    for (i = 0; i < resizefunc.length; i++) {
+        window[resizefunc[i]]();
+    }
+  }
+}
 
 function initscrolls(){
     if(jQuery.browser.mobile !== true){
@@ -279,7 +279,7 @@ function initscrolls(){
           height: 'auto',
           position: 'right',
           size: "5px",
-          color: '#dcdcdc',
+          color: '#98a6ad',
           wheelStep: 5
       });
   }
@@ -294,13 +294,25 @@ function toggle_slimscroll(item){
     }
 }
 
-//var wow = new WOW(
-//  {
-//    boxClass: 'wow', // animated element css class (default is wow)
-//    animateClass: 'animated', // animation css class (default is animated)
-//    offset: 50, // distance to the element when triggering the animation (default is 0)
-//    mobile: false        // trigger animations on mobile devices (true is default)
-//  }
-//);
-//wow.init();
+var wow = new WOW(
+  {
+    boxClass: 'wow', // animated element css class (default is wow)
+    animateClass: 'animated', // animation css class (default is animated)
+    offset: 50, // distance to the element when triggering the animation (default is 0)
+    mobile: false        // trigger animations on mobile devices (true is default)
+  }
+);
+wow.init();
+
+// === following js will activate the menu in left side bar based on url ====
+$(document).ready(function() {
+    $("#sidebar-menu a").each(function() {
+        if (this.href == window.location.href) {
+            $(this).addClass("active");
+            $(this).parent().addClass("active"); // add active to li of the current link
+            $(this).parent().parent().prev().addClass("active"); // add active class to an anchor
+            $(this).parent().parent().prev().click(); // click the item to make it drop
+        }
+    });
+});
 

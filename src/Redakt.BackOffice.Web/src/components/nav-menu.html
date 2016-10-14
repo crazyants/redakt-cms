@@ -15,7 +15,7 @@
                         <a route-href="route: resources" class="${router.currentInstruction.config.name == 'resources' ? 'subdrop' : ''}"><i class="ti-server"></i><span> Resources </span> </a>
                     </li>
                     <li>
-                        <a href="#" class="${router.currentInstruction.config.group == 'configuration' ? 'subdrop' : ''}" click.trigger="this.visible = !this.visible"><i class="ti-settings"></i> <span> Configuration </span> </a>
+                        <a class="${router.currentInstruction.config.group == 'configuration' ? 'subdrop' : ''}" click.trigger="this.visible = !this.visible"><i class="ti-settings"></i> <span> Configuration </span> </a>
                         <ul class="list-unstyled" show.bind="this.visible" style="display: block;">
                             <li class="${router.currentInstruction.config.name == 'pagetypes' ? 'active' : ''}"><a route-href="route: pagetypes">Page Types</a></li>
                         </ul>
