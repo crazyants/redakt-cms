@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace Redakt.Core
 {
-    public class AppSettings
+    public class RedaktSettings
     {
         public string MongoConnectionString { get; set; }
         public string MongoDatabase { get; set; }

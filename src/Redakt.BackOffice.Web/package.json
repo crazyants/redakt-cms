@@ -13,9 +13,17 @@
     "aurelia-fetch-client": "^1.0.0",
     "bluebird": "^3.4.1",
     "bootstrap": "^3.3.7",
+    "browser-sync": "^2.18.2",
     "es6-promise": "^4.0.5",
-    "font-awesome": "^4.6.3",
-    "jquery": "^3.1.1"
+    "font-awesome": "^4.7.0",
+    "gulp": "github:gulpjs/gulp#4.0",
+    "gulp-less": "^3.3.0",
+    "gulp-sourcemaps": "^2.2.1",
+    "jquery": "^3.1.1",
+    "through2": "^2.0.3",
+    "typescript": "^2.1.1",
+    "typings": "^1.5.0",
+    "uglify-js": "^2.7.5"
   },
   "peerDependencies": {},
   "devDependencies": {
