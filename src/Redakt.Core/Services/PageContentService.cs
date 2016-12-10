@@ -11,6 +11,7 @@ namespace Redakt.Core.Services
     public interface IPageContentService
     {
         Task<PageContent> Get(string id);
+        Task<IList<PageContent>> GetForPage(string pageId);
         Task Save(PageContent content);
     }
 
@@ -28,6 +29,11 @@ namespace Redakt.Core.Services
         public Task<PageContent> Get(string id)
         {
             return _cache.AddOrGetExistingAsync(id, s => _pageContentRepository.GetAsync(s));
+        }
+
+        public Task<IList<PageContent>> GetForPage(string pageId)
+        {
+            return _pageContentRepository.FindAsync(x => x.PageId == pageId);
         }
 
         public Task Save(PageContent content)
