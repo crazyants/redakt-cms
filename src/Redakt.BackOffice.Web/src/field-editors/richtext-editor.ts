@@ -5,7 +5,9 @@ import {PageField} from '../models/pagefield';
 import 'summernote'
 
 export class RichTextEditor {
-    field: PageField;
+    private field: PageField;
+    private config: any;
+	private $editor: any;
 
     constructor() {
         
@@ -17,30 +19,28 @@ export class RichTextEditor {
 
     public activate(field: PageField) {
         this.field = field;
+
+		var config = field.definition.editorConfig || { };
+		this.config = 
+		{ 
+			height: config.height || 200
+		};
     }  
 
     public attached() {
-		// this.editor = $(''`#${this.editorId}`'');
-		// this.editor.data('view-model', this);
-		// this.editor.summernote({
-		// 	height: this.height,
-		// 	toolbar: this.toolbar,
-		// 	onChange: (contents) => {
-		// 		this.value = contents;
-		// 	}
-		// });
-		// this.editor.code(this.value);
-
-        (<any>$('.summernote')).summernote({
-			//height: this.height,
-			//toolbar: this.toolbar,
-			onChange: (contents) => {
-				//this.value = contents;
+		this.$editor = $('#editor-' + this.field.key);
+		let field = this.field;
+		this.$editor.summernote({
+			height: this.config.height,
+			callbacks: {
+				onChange: function(contents, $editable) {
+					field.value = contents;
+				}
 			}
 		});
 	}
 
 	public detached() {
-		//this.editor.destroy();
+		this.$editor.summernote('destroy');
 	}
 }

@@ -15,7 +15,7 @@ export interface IFieldDefinition {
     groupName: string;
     sectionName: string;
     editorElementName: string;
-    editorSettings: any;
+    editorConfig: any;
 }
 
 export interface ISiteListItem {

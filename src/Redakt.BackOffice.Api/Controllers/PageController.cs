@@ -61,7 +61,7 @@ namespace Redakt.BackOffice.Api.Controllers
         }
 
         [HttpPut("{id}")]
-        public async Task<IActionResult> UpdatePage(string id, Page page)
+        public async Task<IActionResult> UpdatePage(string id, [FromBody]Page page)
         {
             await _pageService.Save(page);
             return Ok();

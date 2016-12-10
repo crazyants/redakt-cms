@@ -4,8 +4,8 @@ import {IFieldDefinition} from '../models/interfaces';
 import {PageField} from '../models/pagefield';
 
 export class TextboxEditor {
-    field: PageField;
-    settings: any;
+    private field: PageField;
+    private config: any;
 
     constructor() {
         
@@ -17,6 +17,6 @@ export class TextboxEditor {
 
     public activate(field: PageField) {
         this.field = field;
-        this.settings = field.definition.editorSettings;
+        this.config = field.definition.editorConfig;
     }  
 }

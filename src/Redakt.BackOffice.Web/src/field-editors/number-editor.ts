@@ -4,7 +4,7 @@ import {IFieldDefinition} from '../models/interfaces';
 import {PageField} from '../models/pagefield';
 
 export class NumberEditor {
-    field: PageField;
+    private field: PageField;
 
     constructor() {
         

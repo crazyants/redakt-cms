@@ -17,7 +17,7 @@ namespace Redakt.BackOffice.Api.Models
             var fieldType = fieldTypes.FirstOrDefault(x => x.Id == fieldDefinition.FieldTypeId);
             if (fieldType != null)
             {
-                this.EditorSettings = fieldType.FieldEditorSettings;
+                this.EditorConfig = fieldType.FieldEditorSettings;
                 var editor = fieldEditors.FirstOrDefault(x => x.Id == fieldType.FieldEditorId);
                 if (editor != null) this.EditorElementName = editor.UiElementName;
             }
@@ -29,6 +29,6 @@ namespace Redakt.BackOffice.Api.Models
         public string GroupName { get; set; }
         public string SectionName { get; set; }
         public string EditorElementName { get; set; }
-        public object EditorSettings { get; set; }
+        public object EditorConfig { get; set; }
     }
 }

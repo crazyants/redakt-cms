@@ -3,12 +3,14 @@
         <h4 class="header-title m-t-0 m-b-20">${page.name}</h4>
 
         <form class="form-horizontal" role="form">
-            <div class="form-group" repeat.for="fieldDefinition of pageType.fields">
-                <label class="col-md-2 control-label">${fieldDefinition.label}</label>
+            <div class="form-group" repeat.for="field of fields">
+                <label class="col-md-2 control-label">${field.definition.label}</label>
                 <div class="col-md-10">
-                    <compose view-model="../field-editors/${fieldDefinition.editorElementName}" model.bind="field(fieldDefinition.key)"></compose>
+                    <compose view-model="../field-editors/${field.definition.editorElementName}" model.two-way="field"></compose>
                 </div>
             </div>
+
+            <button type="button" class="btn btn-default" click.trigger="save()">Save</button>
         </form>
     </div>
 </template>

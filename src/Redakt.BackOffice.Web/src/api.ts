@@ -169,7 +169,7 @@ export class Api {
             method: 'put',
             body: json(data)
         }).then(r => {
-            return r.json();
+            return;// r.json();
         }).catch(e => {
             alert('Error');
         });

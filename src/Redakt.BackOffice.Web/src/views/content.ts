@@ -10,6 +10,7 @@ import {PageService, PageTypeService} from '../services/services';
 export class ContentView {
     private page: Page;
     private pageType: IPageType;
+    private fields: Array<PageField>;
 
     constructor(private router: Router, private pageService: PageService, private pageTypeService: PageTypeService) {
     }
@@ -21,19 +22,31 @@ export class ContentView {
     public activate(page: Page) {
         this.page = page;
         if (page) {
+            this.fields = [];
             return this.pageTypeService.getPageType(page.pageTypeId).then(pageType => {
                 this.pageType = pageType;
+                this.setFields();
             });
         }
     }
 
-    public field(key: string): PageField {
-        var field = new PageField();
-        field.key = key;
-        field.definition = this.pageType.fields.find(x => x.key === key);
-        var fieldValue = this.page.fields.find(x => x.key === key);
-        if (fieldValue) field.value = fieldValue.value;
-        
-        return field;
+    private setFields() {
+        this.pageType.fields.forEach(f => {
+            var field = new PageField();
+            field.key = f.key;
+            field.definition = f;
+            var fieldValue = this.page.fields.find(x => x.key === f.key);
+            if (fieldValue) field.value = fieldValue.value;
+            this.fields.push(field);
+        });
+    }
+
+    public save() 
+    {
+        this.page.fields = [];
+        this.fields.forEach(f => {
+            this.page.fields.push({ key: f.key, value: f.value });
+        });
+        this.pageService.updatePage(this.page);
     }
 }
