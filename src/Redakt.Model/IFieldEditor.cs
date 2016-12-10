@@ -5,9 +5,17 @@ using System.Threading.Tasks;
 
 namespace Redakt.Model
 {
-    public interface IFieldEditor<T>
+    public interface IFieldEditor
     {
+        string Id { get; }
+
         string Name { get; }
+
+        string UiElementName { get; }
+    }
+
+    public interface IFieldEditor<T>: IFieldEditor
+    {
         bool HasValue { get; }
         T GetValue(T defaultValue = default(T));
         TValue GetValue<TValue>(TValue defaultValue = default(TValue));

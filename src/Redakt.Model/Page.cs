@@ -9,6 +9,7 @@ namespace Redakt.Model
         public Page()
         {
             this.AncestorIds = new List<string>();
+            this.Fields = new List<FieldValue>();
         }
 
         #region [ Model Properties ]
@@ -23,6 +24,8 @@ namespace Redakt.Model
         public string PageTypeId { get; set; }
 
         public string TemplateId { get; set; }
+
+        public List<FieldValue> Fields { get; set; }
 
         public DateTime CreatedAt { get; set; }
 

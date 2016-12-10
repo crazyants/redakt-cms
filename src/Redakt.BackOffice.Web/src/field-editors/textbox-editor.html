@@ -1,0 +1,4 @@
+<template>
+    <input if.bind="!settings.isTextArea" type="text" class="form-control" value.bind="field.value">
+    <textarea if.bind="settings.isTextArea" type="text" class="form-control" value.bind="field.value"></textarea>
+</template>

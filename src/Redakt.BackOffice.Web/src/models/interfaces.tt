@@ -63,15 +63,15 @@ public void WriteModels(EnvDTE.CodeNamespace ns)
 
 public void RenderDtoClass(EnvDTE.CodeClass dto)
 {
-	var name = dto.FullName.Split('.').Last().Replace("Model", "Dto");
+	var name = dto.FullName.Split('.').Last().Replace("Model", "");
 
 	var baseType = dto.Bases.OfType<EnvDTE.CodeElement>().FirstOrDefault();
 	if (!baseType.FullName.Equals("System.Object"))
 	{
 		var baseName = baseType.FullName;
 		var split = baseType.FullName.Split('<', '>');
-		if (split.Count() > 1) name += " extends " + baseType.FullName.Replace("System.Collections.Generic.List", "Array").Replace("System.Collections.Generic.IEnumerable", "Array").Replace(split[1], "I" + split[1].Split('.').Last().Replace("Model", "Dto"));
-		else name += " extends I" + baseType.FullName.Split('.').Last().Replace("Model", "Dto");
+		if (split.Count() > 1) name += " extends " + baseType.FullName.Replace("System.Collections.Generic.List", "Array").Replace("System.Collections.Generic.IEnumerable", "Array").Replace(split[1], "I" + split[1].Split('.').Last().Replace("Model", ""));
+		else name += " extends I" + baseType.FullName.Split('.').Last().Replace("Model", "");
     }
 
 	WriteLine("export interface I{0} {{", name);
@@ -79,7 +79,7 @@ public void RenderDtoClass(EnvDTE.CodeClass dto)
 
 	foreach (var member in dto.Members.OfType<EnvDTE.CodeProperty>())
     {
-		var identifier = member.FullName.Split('.').Last().Replace("Model", "Dto");
+		var identifier = member.FullName.Split('.').Last().Replace("Model", "");
 		WriteLine("{0}{1}{2}: {3};", identifier.Substring(0, 1).ToLowerInvariant(), identifier.Substring(1), member.Type.AsString.Contains("?") ? "?" : "", GetTypeScriptType(member.Type.AsString));
     }
 
@@ -103,8 +103,8 @@ public string GetTypeScriptType(string type)
     }
 
 	var split = type.Split('<', '>');
-	if (split.Count() > 1 && (split[0].Equals("System.Collections.Generic.List") || split[0].Equals("System.Collections.Generic.IEnumerable"))) return string.Format("Array<{0}>", split[1].StartsWith(myNS) ? "I" + split[1].Split('.').Last().Replace("Model", "Dto") : "any");
-	else if (type.StartsWith(myNS)) return "I" + type.Split('.').Last().Replace("Model", "Dto");
+	if (split.Count() > 1 && (split[0].Equals("System.Collections.Generic.List") || split[0].Equals("System.Collections.Generic.IEnumerable"))) return string.Format("Array<{0}>", split[1].StartsWith(myNS) ? "I" + split[1].Split('.').Last().Replace("Model", "") : "any");
+	else if (type.StartsWith(myNS)) return "I" + type.Split('.').Last().Replace("Model", "");
 
 	return "any";
 }

@@ -15,26 +15,29 @@ namespace Redakt.BackOffice.Api.Controllers
     {
         private readonly IPageService _pageService;
         private readonly IPageTypeService _pageTypeService;
+        private readonly IFieldTypeService _fieldTypeService;
 
-        public PageTypeController(IPageService pageService, IPageTypeService pageTypeService)
+        public PageTypeController(IPageService pageService, IPageTypeService pageTypeService, IFieldTypeService fieldTypeService)
         {
             _pageService = pageService;
             _pageTypeService = pageTypeService;
+            _fieldTypeService = fieldTypeService;
         }
 
         [HttpGet("{id}")]
         public async Task<IActionResult> GetPageType(string id)
         {
-            var page = await _pageTypeService.Get(id);
-            if (page == null) return NotFound();
-            return Ok(page);
+            var pageType = await _pageTypeService.Get(id);
+            if (pageType == null) return NotFound();
+
+            return Ok(new PageTypeModel(pageType, await _fieldTypeService.GetAll(), _fieldTypeService.GetAllFieldEditors()));
         }
 
         [HttpGet("list")]
         public async Task<IActionResult> GetPageTypes()
         {
             var pageTypes = await _pageTypeService.GetAll();
-            return Ok(pageTypes.Select(pt => new PageTypeListItem(pt)));
+            return Ok(pageTypes.Select(pt => new PageTypeListItemModel(pt)));
         }
 
         [HttpPost("")]

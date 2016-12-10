@@ -8,7 +8,7 @@ namespace Redakt.Model
 
         protected PersistedEntity()
         {
-            //this.Id = ObjectId.GenerateNewId();
+            this.Id = ObjectId.GenerateNewId();
             DbUpdated = DbCreated = DateTime.UtcNow;
         }
 

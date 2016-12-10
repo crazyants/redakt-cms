@@ -4,22 +4,19 @@ using Redakt.Model;
 
 namespace Redakt.Web.Editors
 {
-    public class NumberEditorConfiguration
+    public class NumberEditor: IFieldEditor<decimal?>, IFieldEditor
     {
-        public bool IsDecimal { get; set; }
-        public int? DecimalPlaces { get; set; }
-    }
-
-    public class NumberEditor: IConfigurableFieldEditor<decimal, NumberEditorConfiguration>
-    {
-        private NumberEditorConfiguration _config;
         private decimal? _value;
+
+        public string Id => "479a9f0acddd4af3bb3ff98d492f0e1a";
 
         public string Name => "Number Editor";
 
+        public string UiElementName => "number-editor";
+
         public bool HasValue => _value.HasValue;
 
-        public decimal GetValue(decimal defaultValue = 0)
+        public decimal? GetValue(decimal? defaultValue = null)
         {
             return _value ?? defaultValue;
         }
@@ -51,7 +48,5 @@ namespace Redakt.Web.Editors
                 // ignored
             }
         }
-
-        public NumberEditorConfiguration Configuration { get; set; }
     }
 }

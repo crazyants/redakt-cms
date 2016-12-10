@@ -31,7 +31,7 @@ namespace Redakt.BackOffice.Api.Controllers
         public async Task<IActionResult> GetSites()
         {
             var sites = await _siteService.GetAll();
-            return Ok(sites.Select(s => new SiteListItem(s)));
+            return Ok(sites.Select(s => new SiteListItemModel(s)));
         }
 
         [HttpPost("")]

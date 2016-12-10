@@ -27,6 +27,7 @@ namespace Redakt.BackOffice.Api.Controllers
         {
             var page = await _pageService.Get(id);
             if (page == null) return NotFound();
+
             return Ok(page);
         }
 
@@ -37,7 +38,7 @@ namespace Redakt.BackOffice.Api.Controllers
             if (page == null) return NotFound();
             var pageType = await _pageTypeService.Get(page.PageTypeId);
 
-            return Ok(new PageTreeItem(page, pageType.IconClass));
+            return Ok(new PageTreeItemModel(page, pageType.IconClass));
         }
 
         [HttpGet("{id}/children/treeitem")]
@@ -49,7 +50,7 @@ namespace Redakt.BackOffice.Api.Controllers
             {
                 if (!pageTypes.Any(pt => pt.Id == page.PageTypeId)) pageTypes.Add(await _pageTypeService.Get(page.PageTypeId));
             }
-            return Ok(pages.Select(p => new PageTreeItem(p, pageTypes.First(pt => pt.Id == p.PageTypeId).IconClass)));
+            return Ok(pages.Select(p => new PageTreeItemModel(p, pageTypes.First(pt => pt.Id == p.PageTypeId).IconClass)));
         }
 
         [HttpPost("")]

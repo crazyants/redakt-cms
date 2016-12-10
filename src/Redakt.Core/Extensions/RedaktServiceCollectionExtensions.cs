@@ -34,6 +34,7 @@ namespace Redakt.Core.Extensions
             services.AddSingleton<IPageService, PageService>();
             services.AddSingleton<IPageContentService, PageContentService>();
             services.AddSingleton<IPageTypeService, PageTypeService>();
+            services.AddSingleton<IFieldTypeService, FieldTypeService>();
 
             if (options.UseTestData)
             {
@@ -42,6 +43,7 @@ namespace Redakt.Core.Extensions
                 services.AddScoped<IPageRepository, Data.Test.Repository.PageRepository>();
                 services.AddScoped<IPageContentRepository, Data.Test.Repository.PageContentRepository>();
                 services.AddScoped<IPageTypeRepository, Data.Test.Repository.PageTypeRepository>();
+                services.AddScoped<IFieldTypeRepository, Data.Test.Repository.FieldTypeRepository>();
             }
             else
             {

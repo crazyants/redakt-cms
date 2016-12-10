@@ -2,9 +2,9 @@
 
 namespace Redakt.BackOffice.Api.Models
 {
-    public class SiteListItem
+    public class SiteListItemModel
     {
-        public SiteListItem(Site site)
+        public SiteListItemModel(Site site)
         {
             this.Id = site.Id;
             this.Name = site.Name;

@@ -9,6 +9,8 @@ export class Page implements IPageTreeItem {
     public id: string;
     public name: string;
     public parentId: string;
+    public pageTypeId: string;
     public iconClass: string;
     public hasChildren: boolean;
+    public fields: Array<any>;
 }

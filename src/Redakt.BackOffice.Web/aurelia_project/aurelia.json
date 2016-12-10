@@ -134,7 +134,14 @@
           {
             "name": "bootstrap",
             "path": "../node_modules/bootstrap/dist",
-            "main": "js/bootstrap.min",
+            "main": "js/bootstrap",
+            "deps": [ "jquery" ],
+            "exports": "$"
+          },
+          {
+            "name": "summernote",
+            "path": "../node_modules/summernote/dist",
+            "main": "summernote.min",
             "deps": [ "jquery" ],
             "exports": "$"
           }

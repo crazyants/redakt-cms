@@ -15,7 +15,8 @@
     "Microsoft.Extensions.Logging.Debug": "1.1.0",
     "Newtonsoft.Json": "9.0.2-beta1",
     "Redakt.Core": "1.0.0-*",
-    "Redakt.BackOffice.Api": "1.0.0-*"
+    "Redakt.BackOffice.Api": "1.0.0-*",
+    "Redakt.Web": "1.0.0-*"
   },
 
   "tools": {

@@ -2,9 +2,20 @@
 export interface IPageTreeItem {
     id: string;
     parentId: string;
+    pageTypeId: string;
     name: string;
     iconClass: string;
     hasChildren: boolean;
+}
+
+export interface IFieldDefinition {
+    key: string;
+    label: string;
+    fieldTypeId: string;
+    groupName: string;
+    sectionName: string;
+    editorElementName: string;
+    editorSettings: any;
 }
 
 export interface ISiteListItem {
@@ -17,6 +28,13 @@ export interface IPageTypeListItem {
     id: string;
     name: string;
     iconClass: string;
+}
+
+export interface IPageType {
+    id: string;
+    name: string;
+    iconClass: string;
+    fields: Array<IFieldDefinition>;
 }
 
 export interface IUser extends IPersistedEntity {
@@ -47,6 +65,7 @@ export interface IPage extends IPersistedEntity {
     hasChildren: boolean;
     pageTypeId: string;
     templateId: string;
+    fields: Array<IFieldValue>;
     createdAt: Date;
     createdByUserId: string;
     publishedAt?: Date;
@@ -82,6 +101,11 @@ export interface ISite extends IPersistedEntity {
 export interface IContentView {
     content: IPageContent;
     pageType: IPageType;
+}
+
+export interface IFieldValue {
+    key: string;
+    value: any;
 }
 
 export interface IPageType extends IPersistedEntity {

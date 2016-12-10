@@ -33,90 +33,106 @@ namespace Redakt.Data.Test
             //};
             var numberFieldType = new FieldType
             {
-                Name = "Numeric"
+                Name = "Numeric",
+                FieldEditorId = "479a9f0acddd4af3bb3ff98d492f0e1a"
             };
             var stringFieldType = new FieldType
             {
-                Name = "Textstring"
+                Name = "Textstring",
+                FieldEditorId = "15317e3a67044ee5af7ccba1e9537cde"
             };
             var areaFieldType = new FieldType
             {
-                Name = "Textarea"
+                Name = "Textarea",
+                FieldEditorId = "15317e3a67044ee5af7ccba1e9537cde",
+                FieldEditorSettings = new { IsTextArea = true }
             };
             var rtfFieldType = new FieldType
             {
-                Name = "Rich text editor"
+                Name = "Rich text editor",
+                FieldEditorId = "adde787fb7e746f69dbef237e1be80f8"
             };
             FieldTypeRepository.Collection.Add(numberFieldType);
             FieldTypeRepository.Collection.Add(stringFieldType);
             FieldTypeRepository.Collection.Add(areaFieldType);
             FieldTypeRepository.Collection.Add(rtfFieldType);
 
-            var pageType = new PageType
+            var contentPageType = new PageType
             {
                 Id = Guid.NewGuid().ToString("N"),
-                Name = "Content Page Type",
+                Name = "Content Page",
                 IconClass = "md md-content-copy"
             };
-            pageType.Fields.Add(new FieldDefinition { Key = "title", Label = "Titel", FieldTypeId = stringFieldType.Id });
-            pageType.Fields.Add(new FieldDefinition { Key = "quantity", Label = "Hoeveelheid", FieldTypeId = numberFieldType.Id });
-            pageType.Fields.Add(new FieldDefinition { Key = "intro", Label = "Introtekst", FieldTypeId = areaFieldType.Id });
-            pageType.Fields.Add(new FieldDefinition { Key = "body", Label = "Body tekst", FieldTypeId = rtfFieldType.Id });
+            contentPageType.Fields.Add(new FieldDefinition { Key = "title", Label = "Titel", FieldTypeId = stringFieldType.Id });
+            contentPageType.Fields.Add(new FieldDefinition { Key = "quantity", Label = "Hoeveelheid", FieldTypeId = numberFieldType.Id });
+            contentPageType.Fields.Add(new FieldDefinition { Key = "intro", Label = "Introtekst", FieldTypeId = areaFieldType.Id });
+            contentPageType.Fields.Add(new FieldDefinition { Key = "body", Label = "Body tekst", FieldTypeId = rtfFieldType.Id });
+            PageTypeRepository.Collection.Add(contentPageType);
 
-            PageTypeRepository.Collection.Add(pageType);
+            var homePageType = new PageType
+            {
+                Id = Guid.NewGuid().ToString("N"),
+                Name = "Home Page",
+                IconClass = "md md-home"
+            };
+            homePageType.Fields.Add(new FieldDefinition { Key = "intro", Label = "Introtekst", FieldTypeId = areaFieldType.Id });
+            homePageType.Fields.Add(new FieldDefinition { Key = "body", Label = "Body tekst", FieldTypeId = rtfFieldType.Id });
+            PageTypeRepository.Collection.Add(homePageType);
 
             // Pages
             var homePage1 = new Page
             {
-                Id = Guid.NewGuid().ToString("N"),
-                PageTypeId = pageType.Id,
+                PageTypeId = homePageType.Id,
                 HasChildren = true,
-                Name = "Redakt Home"
+                Name = "Redakt Home",
+                Fields = new List<FieldValue> { new FieldValue { Key = "intro", Value = "Redakt Home intro value" }, new FieldValue { Key = "body", Value = "Redakt Home body value" } }
             };
             var homePage2 = new Page
             {
-                Id = Guid.NewGuid().ToString("N"),
-                PageTypeId = pageType.Id,
+                PageTypeId = homePageType.Id,
                 HasChildren = true,
-                Name = "Carvellis Home"
+                Name = "Carvellis Home",
+                Fields = new List<FieldValue> { new FieldValue { Key = "intro", Value = "Carvellis Home intro value" }, new FieldValue { Key = "body", Value = "Carvellis Home body value" } }
             };
 
             PageRepository.Collection.Add(homePage1);
             PageRepository.Collection.Add(homePage2);
-            PageRepository.Collection.AddRange(CreatePageStructure(homePage1, 10, 5, 3));
-            PageRepository.Collection.AddRange(CreatePageStructure(homePage2, 6, 8));
+            PageRepository.Collection.AddRange(CreatePageStructure(homePage1, contentPageType, 10, 5, 3));
+            PageRepository.Collection.AddRange(CreatePageStructure(homePage2, contentPageType, 6, 8));
 
             // Sites
             SiteRepository.Collection.Add(new Site
             {
-                Id = Guid.NewGuid().ToString("N"),
                 HomePageId = homePage1.Id,
                 Name = "Redakt CMS"
             });
             SiteRepository.Collection.Add(new Site
             {
-                Id = Guid.NewGuid().ToString("N"),
                 HomePageId = homePage2.Id,
                 Name = "Carvellis Web Development"
             });
         }
 
-        private List<Page> CreatePageStructure(Page parent, params int[] levels)
+        private List<Page> CreatePageStructure(Page parent, PageType pageType, params int[] levels)
         {
             var list = new List<Page>();
             for (int i = 0; i < levels[0]; i++)
             {
                 var page = new Page
                 {
-                    Id = Guid.NewGuid().ToString("N"),
-                    PageTypeId = parent.PageTypeId,
+                    PageTypeId = pageType.Id,
                     HasChildren = levels.Count() > 1,
                     Name = "Page " + i
                 };
+                page.Fields.Add(new FieldValue { Key = "title", Value = page.Name + " title value" });
+                page.Fields.Add(new FieldValue { Key = "quantity", Value = page.Name + " quantity value" });
+                page.Fields.Add(new FieldValue { Key = "intro", Value = page.Name + " intro value" });
+                page.Fields.Add(new FieldValue { Key = "body", Value = page.Name + " body value" });
+
                 page.SetParent(parent);
                 list.Add(page);
 
-                if (levels.Count() > 1) list.AddRange(CreatePageStructure(page, levels.Skip(1).ToArray()));
+                if (levels.Count() > 1) list.AddRange(CreatePageStructure(page, pageType, levels.Skip(1).ToArray()));
             }
             return list;
         }

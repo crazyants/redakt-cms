@@ -63,7 +63,7 @@ export class Api {
         }).then(r => {
             return r.json();
         }).then(json => {
-            return json.access_token;
+            return (<any>json).access_token;
         });
     }
 
