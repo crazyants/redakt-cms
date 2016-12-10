@@ -6,22 +6,22 @@ namespace Redakt.Data.Mongo
     public class MongoConnection: IConnection
     {
         #region [ Variables ]
-        private readonly DataSettings _dbSettings;
+        private readonly RedaktSettings _settings;
         
         private readonly MongoClient _client;
         private IMongoDatabase _database;
         #endregion
 
         #region [ Constructors ]
-        public MongoConnection(IOptions<DataSettings> dbSettings)
+        public MongoConnection(IOptionsSnapshot<RedaktSettings> settings)
         {
-            _dbSettings = dbSettings.Value;
-            _client = new MongoClient(_dbSettings.MongoConnectionString);
+            _settings = settings.Value;
+            _client = new MongoClient(_settings.MongoConnectionString);
         }
         #endregion
 
         #region [ Properties ]
-        public IMongoDatabase Database => _database ?? (_database = _client.GetDatabase(_dbSettings.MongoDatabase));
+        public IMongoDatabase Database => _database ?? (_database = _client.GetDatabase(_settings.MongoDatabase));
 
         #endregion
     }

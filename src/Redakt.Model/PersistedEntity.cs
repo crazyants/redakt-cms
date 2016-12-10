@@ -1,4 +1,5 @@
-﻿using System;
+﻿using MongoDB.Bson;
+using System;
 
 namespace Redakt.Model
 {
@@ -8,7 +9,7 @@ namespace Redakt.Model
 
         protected PersistedEntity()
         {
-            this.Id = ObjectId.GenerateNewId();
+            this.Id = ObjectId.GenerateNewId().ToString();
             DbUpdated = DbCreated = DateTime.UtcNow;
         }
 

@@ -59,7 +59,6 @@ namespace Redakt.Data.Test
 
             var contentPageType = new PageType
             {
-                Id = Guid.NewGuid().ToString("N"),
                 Name = "Content Page",
                 IconClass = "md md-content-copy"
             };

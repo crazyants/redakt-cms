@@ -3,9 +3,8 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
-using Microsoft.AspNetCore.Mvc.Formatters;
-using Newtonsoft.Json.Serialization;
 using Redakt.Core.Extensions;
+using Redakt.Data;
 
 namespace Redakt.Starter.Web
 {
@@ -15,7 +14,7 @@ namespace Redakt.Starter.Web
         {
             var builder = new ConfigurationBuilder()
                 .SetBasePath(env.ContentRootPath)
-                .AddJsonFile("appsettings.json", optional: true, reloadOnChange: true)
+                .AddJsonFile("appsettings.json", optional: false, reloadOnChange: true)
                 .AddJsonFile($"appsettings.{env.EnvironmentName}.json", optional: true)
                 .AddEnvironmentVariables();
             Configuration = builder.Build();
@@ -26,7 +25,7 @@ namespace Redakt.Starter.Web
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            //services.Configure<AppSettings>(Configuration.GetSection("AppSettings"));
+            services.Configure<RedaktSettings>(Configuration.GetSection("RedaktSettings"));
 
             //services.AddLogging();
 
@@ -51,7 +50,7 @@ namespace Redakt.Starter.Web
 
             services.AddRedakt(options =>
             {
-                options.UseTestData = true;
+                options.UseTestData = false;
             });
         }
 

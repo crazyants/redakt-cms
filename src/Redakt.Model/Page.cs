@@ -15,7 +15,7 @@ namespace Redakt.Model
         #region [ Model Properties ]
         public string Name { get; set; }
 
-        public string ParentId => this.AncestorIds.LastOrDefault();
+        public string ParentId { get; private set; }
 
         public IReadOnlyCollection<string> AncestorIds { get; private set; }
 
@@ -48,12 +48,14 @@ namespace Redakt.Model
         {
             if (parent == null)
             {
+                this.ParentId = null;
                 this.AncestorIds = new List<string>();
             }
             else
             {
+                this.ParentId = parent.Id;
                 var ancestors = parent.AncestorIds.ToList();
-                ancestors.Add(parent.Id);
+                ancestors.Add(this.ParentId);
                 this.AncestorIds = ancestors;
             }
         }

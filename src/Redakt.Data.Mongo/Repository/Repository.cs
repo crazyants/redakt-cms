@@ -64,7 +64,7 @@ namespace Redakt.Data.Mongo.Repository
             foreach (var entity in entities)
             {
                 entity.DbUpdated = DateTime.UtcNow;
-                models.Add(new ReplaceOneModel<T>(new BsonDocument("_id", entity.Id), entity) { IsUpsert = true });
+                models.Add(new ReplaceOneModel<T>(new BsonDocument("_id", new ObjectId(entity.Id)), entity) { IsUpsert = true });
             }
 
             return this.Collection.BulkWriteAsync(models);

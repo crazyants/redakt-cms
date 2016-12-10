@@ -47,9 +47,13 @@ namespace Redakt.Core.Extensions
             }
             else
             {
-                //services.AddScoped<ISiteRepository, Data.Mongo.Repository.SiteRepository>();
-                //services.AddScoped<IPageRepository, Data.Mongo.Repository.PageRepository>();
-                //services.AddScoped<IPageContentRepository, Data.Mongo.Repository.PageContentRepository>();
+                services.AddTransient<IDbInit, Data.Mongo.DbInit>();
+                services.AddScoped<Data.Mongo.IConnection, Data.Mongo.MongoConnection>();
+                services.AddScoped<ISiteRepository, Data.Mongo.Repository.SiteRepository>();
+                services.AddScoped<IPageRepository, Data.Mongo.Repository.PageRepository>();
+                services.AddScoped<IPageContentRepository, Data.Mongo.Repository.PageContentRepository>();
+                services.AddScoped<IPageTypeRepository, Data.Mongo.Repository.PageTypeRepository>();
+                services.AddScoped<IFieldTypeRepository, Data.Mongo.Repository.FieldTypeRepository>();
             }
 
             return services;

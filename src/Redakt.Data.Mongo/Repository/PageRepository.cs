@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using MongoDB.Driver;
@@ -14,14 +15,26 @@ namespace Redakt.Data.Mongo.Repository
         {
         }
 
-        public Task<IList<Page>> GetChildren(string pageId)
+        public Task<IList<Page>> GetChildrenAsync(string pageId)
         {
-            return this.FindAsync(x => x.AncestorIds.LastOrDefault() == pageId);
+            return this.FindAsync(x => x.ParentId == pageId);
         }
 
-        public Task<IList<Page>> GetDescendants(string pageId)
+        public Task<IList<Page>> GetDescendantsAsync(string pageId)
         {
             return this.FindAsync(x => x.AncestorIds.Contains(pageId));
+        }
+
+        public Task<bool> HasChildrenAsync(string pageId)
+        {
+            return this.AnyAsync(x => x.ParentId == pageId);
+        }
+
+        public async Task SetHasChildrenAsync(string pageId, bool hasChildren)
+        {
+            var page = await this.GetAsync(pageId);
+            page.HasChildren = hasChildren;
+            await this.SaveAsync(page);
         }
     }
 }
