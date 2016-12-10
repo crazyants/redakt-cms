@@ -15,11 +15,13 @@ namespace Redakt.BackOffice.Api.Controllers
     {
         private readonly IPageService _pageService;
         private readonly IPageTypeService _pageTypeService;
+        private readonly IPageContentService _pageContentService;
 
-        public PageController(IPageService pageService, IPageTypeService pageTypeService)
+        public PageController(IPageService pageService, IPageTypeService pageTypeService, IPageContentService pageContentService)
         {
             _pageService = pageService;
             _pageTypeService = pageTypeService;
+            _pageContentService = pageContentService;
         }
 
         [HttpGet("{id}")]
@@ -28,7 +30,9 @@ namespace Redakt.BackOffice.Api.Controllers
             var page = await _pageService.Get(id);
             if (page == null) return NotFound();
 
-            return Ok(page);
+            var content = await _pageContentService.GetForPage(page.Id);
+
+            return Ok(new PageModel(page, content));
         }
 
         [HttpGet("{id}/treeitem")]
@@ -53,16 +57,38 @@ namespace Redakt.BackOffice.Api.Controllers
             return Ok(pages.Select(p => new PageTreeItemModel(p, pageTypes.First(pt => pt.Id == p.PageTypeId).IconClass)));
         }
 
-        [HttpPost("")]
-        public async Task<IActionResult> CreatePage(Page page)
+        [HttpPost("{parentId}/children")]
+        public async Task<IActionResult> CreatePage(string parentId, [FromBody]PageUpdateModel model)
         {
+            var parent = await _pageService.Get(parentId);
+            if (parent == null) return BadRequest();
+
+            var page = new Page();
+            model.FillModel(page);
+            page.SetParent(parent);
+
+            await _pageService.Save(page);
+            return Ok(page.Id);
+        }
+
+        [HttpPost("")]
+        public async Task<IActionResult> CreateRootPage([FromBody]PageUpdateModel model)
+        {
+            var page = new Page();
+            model.FillModel(page);
+
             await _pageService.Save(page);
             return Ok(page.Id);
         }
 
         [HttpPut("{id}")]
-        public async Task<IActionResult> UpdatePage(string id, [FromBody]Page page)
+        public async Task<IActionResult> UpdatePage(string id, [FromBody]PageUpdateModel model)
         {
+            var page = await _pageService.Get(id);
+            if (page == null) return BadRequest();
+
+            model.FillModel(page);
+
             await _pageService.Save(page);
             return Ok();
         }

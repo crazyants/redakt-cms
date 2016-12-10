@@ -5,6 +5,11 @@ namespace Redakt.Model
 {
     public class PageContent : PersistedEntity
     {
+        public PageContent()
+        {
+            this.Fields = new Dictionary<string, object>();
+        }
+
         #region [ Model Properties ]
         public string PageId { get; set; }
 

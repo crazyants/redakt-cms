@@ -11,7 +11,7 @@
 <#@ import namespace="System.Collections.Generic" #><#@ include file="..\..\VisualStudioHelper.ttinclude" #>
 <#
 	GenerateModels("Redakt.BackOffice.Api", "Redakt.BackOffice.Api.Models");
-	GenerateModels("Redakt.Model", "Redakt.Model");
+	//GenerateModels("Redakt.Model", "Redakt.Model");
 #>
 <#+
 string myNS;

@@ -2,7 +2,7 @@
 import {Api} from '../api';
 import {Site} from '../models/site';
 import {Page} from '../models/page';
-import {ISiteListItem, IPageTreeItem, IPageTypeListItem, IPageType} from '../models/interfaces';
+import {ISiteListItem, IPageTreeItem, IPageTypeListItem, IPageType, IPage} from '../models/interfaces';
 
 @autoinject()
 export class PageTypeService {
@@ -42,7 +42,7 @@ export class PageService {
         return this.api.get('pages/' + id + '/treeitem');
     }
 
-    public updatePage(page: Page): Promise<void> {
+    public updatePage(page: IPage): Promise<void> {
         return this.api.put('pages/' + page.id, page);
     }
 

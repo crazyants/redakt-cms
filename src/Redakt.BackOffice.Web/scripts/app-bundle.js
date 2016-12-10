@@ -504,21 +504,20 @@ define('views/content',["require", "exports", "aurelia-framework", "aurelia-rout
         };
         ContentView.prototype.setFields = function () {
             var _this = this;
+            var content = this.page.content[0];
             this.pageType.fields.forEach(function (f) {
                 var field = new pagefield_1.PageField();
                 field.key = f.key;
                 field.definition = f;
-                var fieldValue = _this.page.fields.find(function (x) { return x.key === f.key; });
-                if (fieldValue)
-                    field.value = fieldValue.value;
+                field.value = content.fields[f.key];
                 _this.fields.push(field);
             });
         };
         ContentView.prototype.save = function () {
-            var _this = this;
-            this.page.fields = [];
+            var content = this.page.content[0];
+            content.fields = [];
             this.fields.forEach(function (f) {
-                _this.page.fields.push({ key: f.key, value: f.value });
+                content.fields.push({ key: f.key, value: f.value });
             });
             this.pageService.updatePage(this.page);
         };

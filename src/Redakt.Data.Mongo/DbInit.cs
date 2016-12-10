@@ -100,21 +100,35 @@ namespace Redakt.Data.Mongo
             {
                 PageTypeId = homePageType.Id,
                 HasChildren = true,
-                Name = "Redakt Home",
-                Fields = new List<FieldValue> { new FieldValue { Key = "intro", Value = "Redakt Home intro value" }, new FieldValue { Key = "body", Value = "Redakt Home body value" } }
+                Name = "Redakt Home"
             };
+            var homePage1Content = new PageContent
+            {
+                PageId = homePage1.Id,
+                Culture = "en-US",
+                Fields = new Dictionary<string, object>() { { "intro", "Redakt Home intro value" }, { "body", "Redakt Home body value" } }
+            };
+
             var homePage2 = new Page
             {
                 PageTypeId = homePageType.Id,
                 HasChildren = true,
-                Name = "Carvellis Home",
-                Fields = new List<FieldValue> { new FieldValue { Key = "intro", Value = "Carvellis Home intro value" }, new FieldValue { Key = "body", Value = "Carvellis Home body value" } }
+                Name = "Carvellis Home"
+            };
+            var homePage2Content = new PageContent
+            {
+                PageId = homePage2.Id,
+                Culture = "en-US",
+                Fields = new Dictionary<string, object>() { { "intro", "Carvellis Home intro value" }, { "body", "Carvellis Home body value" } }
             };
 
             _pageRepository.SaveAsync(homePage1).Wait();
             _pageRepository.SaveAsync(homePage2).Wait();
-            _pageRepository.SaveAsync(CreatePageStructure(homePage1, contentPageType, 10, 5, 3)).Wait();
-            _pageRepository.SaveAsync(CreatePageStructure(homePage2, contentPageType, 6, 8)).Wait();
+            _pageContentRepository.SaveAsync(homePage1Content).Wait();
+            _pageContentRepository.SaveAsync(homePage2Content).Wait();
+
+            CreatePageStructure(homePage1, contentPageType, 10, 5, 3);
+            CreatePageStructure(homePage2, contentPageType, 6, 8);
 
             // Sites
             _siteRepository.SaveAsync(new Site
@@ -129,9 +143,8 @@ namespace Redakt.Data.Mongo
             }).Wait();
         }
 
-        private List<Page> CreatePageStructure(Page parent, PageType pageType, params int[] levels)
+        private void CreatePageStructure(Page parent, PageType pageType, params int[] levels)
         {
-            var list = new List<Page>();
             for (int i = 0; i < levels[0]; i++)
             {
                 var page = new Page
@@ -140,17 +153,23 @@ namespace Redakt.Data.Mongo
                     HasChildren = levels.Count() > 1,
                     Name = "Page " + i
                 };
-                page.Fields.Add(new FieldValue { Key = "title", Value = page.Name + " title value" });
-                page.Fields.Add(new FieldValue { Key = "quantity", Value = page.Name + " quantity value" });
-                page.Fields.Add(new FieldValue { Key = "intro", Value = page.Name + " intro value" });
-                page.Fields.Add(new FieldValue { Key = "body", Value = page.Name + " body value" });
 
                 page.SetParent(parent);
-                list.Add(page);
+                _pageRepository.SaveAsync(page).Wait();
 
-                if (levels.Count() > 1) list.AddRange(CreatePageStructure(page, pageType, levels.Skip(1).ToArray()));
+                var content = new PageContent
+                {
+                    PageId = page.Id,
+                    Culture = "en-US"
+                };
+                content.Fields.Add("title", page.Name + " title value");
+                content.Fields.Add("quantity", page.Name + " quantity value");
+                content.Fields.Add("intro", page.Name + " intro value");
+                content.Fields.Add("body", page.Name + " body value");
+                _pageContentRepository.SaveAsync(content).Wait();
+
+                if (levels.Count() > 1) CreatePageStructure(page, pageType, levels.Skip(1).ToArray());
             }
-            return list;
         }
 
         private void EnsureIndices()

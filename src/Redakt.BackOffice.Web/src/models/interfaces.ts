@@ -8,6 +8,17 @@ export interface IPageTreeItem {
     hasChildren: boolean;
 }
 
+export interface IPageUpdate {
+    pageTypeId: string;
+    name: string;
+}
+
+export interface IPage extends IPageUpdate {
+    id: string;
+    parentId: string;
+    content: Array<IPageContent>;
+}
+
 export interface IFieldDefinition {
     key: string;
     label: string;
@@ -37,81 +48,13 @@ export interface IPageType {
     fields: Array<IFieldDefinition>;
 }
 
-export interface IUser extends IPersistedEntity {
-    name: string;
-}
-
-export interface IFieldType extends IPersistedEntity {
-    name: string;
-    fieldEditorId: string;
-    fieldEditorSettings: any;
-}
-
-export interface IObjectId {
-}
-
-export interface IFieldDefinition {
-    key: string;
-    label: string;
-    fieldTypeId: string;
-    groupName: string;
-    sectionName: string;
-}
-
-export interface IPage extends IPersistedEntity {
-    name: string;
-    parentId: string;
-    ancestorIds: any;
-    hasChildren: boolean;
-    pageTypeId: string;
-    templateId: string;
-    fields: Array<IFieldValue>;
-    createdAt: Date;
-    createdByUserId: string;
-    publishedAt?: Date;
-    publishedByUserId: string;
-    isPublished: boolean;
-}
-
-export interface IResource extends IPersistedEntity {
-    name: string;
-    contentId: string;
-    contentTypeId: string;
-}
-
-export interface IPageContent extends IPersistedEntity {
-    pageId: string;
+export interface IPageContentUpdate {
     culture: string;
-    created: Date;
     fields: any;
-    createdUserId: string;
 }
 
-export interface IPersistedEntity {
+export interface IPageContent extends IPageContentUpdate {
     id: string;
-    dbCreated: Date;
-    dbUpdated: Date;
-}
-
-export interface ISite extends IPersistedEntity {
-    homePageId: string;
-    name: string;
-}
-
-export interface IContentView {
-    content: IPageContent;
-    pageType: IPageType;
-}
-
-export interface IFieldValue {
-    key: string;
-    value: any;
-}
-
-export interface IPageType extends IPersistedEntity {
-    name: string;
-    compositedPageTypeIds: Array<any>;
-    fields: Array<IFieldDefinition>;
-    iconClass: string;
+    pageId: string;
 }
 

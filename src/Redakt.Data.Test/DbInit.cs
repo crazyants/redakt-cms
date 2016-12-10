@@ -83,15 +83,13 @@ namespace Redakt.Data.Test
             {
                 PageTypeId = homePageType.Id,
                 HasChildren = true,
-                Name = "Redakt Home",
-                Fields = new List<FieldValue> { new FieldValue { Key = "intro", Value = "Redakt Home intro value" }, new FieldValue { Key = "body", Value = "Redakt Home body value" } }
+                Name = "Redakt Home"
             };
             var homePage2 = new Page
             {
                 PageTypeId = homePageType.Id,
                 HasChildren = true,
-                Name = "Carvellis Home",
-                Fields = new List<FieldValue> { new FieldValue { Key = "intro", Value = "Carvellis Home intro value" }, new FieldValue { Key = "body", Value = "Carvellis Home body value" } }
+                Name = "Carvellis Home"
             };
 
             PageRepository.Collection.Add(homePage1);
@@ -123,10 +121,6 @@ namespace Redakt.Data.Test
                     HasChildren = levels.Count() > 1,
                     Name = "Page " + i
                 };
-                page.Fields.Add(new FieldValue { Key = "title", Value = page.Name + " title value" });
-                page.Fields.Add(new FieldValue { Key = "quantity", Value = page.Name + " quantity value" });
-                page.Fields.Add(new FieldValue { Key = "intro", Value = page.Name + " intro value" });
-                page.Fields.Add(new FieldValue { Key = "body", Value = page.Name + " body value" });
 
                 page.SetParent(parent);
                 list.Add(page);
